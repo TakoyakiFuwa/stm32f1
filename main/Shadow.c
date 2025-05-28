@@ -9,6 +9,8 @@
 #include "Func.h"
 /*  外设库  */
 #include "U_USART1.h"
+/*  驱动库  */
+#include "TFT_ST7735.h"
 
 /**@brief  初始化线程
   */
@@ -17,7 +19,7 @@ void Start_MainTask(void* pvParameters)
 	//启动内容
 	Start_Func();
 		//初始化函数-格式建议用Init_Xxx
-	
+	Init_TFT();
 	
 	
 	//进入临界区
