@@ -113,23 +113,23 @@ void Init_TFT(void)
 		//软件初始化
 	TFT_SoftwareInit();
 		//画蓝白粉()
-	uint8_t width = 128/3 +1;
+	uint8_t width = 133/3 +1;
 	uint16_t blue  = TFT_RGB888To565(0x5FCDE4);
 	uint16_t white = TFT_RGB888To565(0xFFFFFF); 
 	uint16_t pink  = TFT_RGB888To565(0xFFB6C1);
 	
-	TFT_SetRect(0,0,160,width);
-	for(int i=0;i<width*160;i++)
+	TFT_SetRect(0,0,168,width);
+	for(int i=0;i<width*168;i++)
 	{
 		TFT_WriteData16(pink);
 	}
-	TFT_SetRect(0,width,160,width);
-	for(int i=0;i<width*160;i++)
+	TFT_SetRect(0,width,168,width);
+	for(int i=0;i<width*168;i++)
 	{
 		TFT_WriteData16(white);
 	}
-	TFT_SetRect(0,width*2,160,width);
-	for(int i=0;i<width*160;i++)
+	TFT_SetRect(0,width*2,168,width);
+	for(int i=0;i<width*168;i++)
 	{
 		TFT_WriteData16(blue);
 	}

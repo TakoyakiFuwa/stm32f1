@@ -835,6 +835,16 @@
               <FileType>5</FileType>
               <FilePath>..\library\TFT_ST7735.h</FilePath>
             </File>
+            <File>
+              <FileName>W25Q64.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\library\W25Q64.c</FilePath>
+            </File>
+            <File>
+              <FileName>W25Q64.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\library\W25Q64.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
