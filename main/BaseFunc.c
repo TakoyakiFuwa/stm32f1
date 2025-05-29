@@ -17,7 +17,7 @@ void Start_Func(void)
 	//串口初始化应该放在最前
 	Start_CommandInit();
 	Start_LEDInit();
-	Start_WDGInit(3000);
+//	Start_WDGInit(3000);
 
 	taskENTER_CRITICAL();
 	TaskHandle_t START_LEDTASK_Handler;

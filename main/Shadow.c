@@ -12,6 +12,7 @@
 /*  驱动库  */
 #include "TFT_ST7735.h"
 #include "W25Q64.h"
+#include "USART_WQ.h"
 
 /**@brief  初始化线程
   */
@@ -22,7 +23,7 @@ void Start_MainTask(void* pvParameters)
 		//初始化函数-格式建议用Init_Xxx
 //	Init_TFT();
 	Init_WQ();
-	
+	UWQ_Init();
 	
 	//进入临界区
 	taskENTER_CRITICAL();
@@ -56,6 +57,28 @@ uint8_t Start_CommandFunc(void)
 	else if(Command("WQ"))
 	{
 		Cmd_WQ();
+	}
+	else if(Command("INDEX"))
+	{
+		WQ_PrintfIndex();
+	}
+	else if(Command("READ"))
+	{
+		wq_memory c_wq;
+		uint8_t data;
+		c_wq = WQ_Open(5,wq_state_read);
+		while(WQ_Read(&c_wq,&data,1)!=-1)
+		{
+			U_Printf("%c",data);
+		}
+		
+		
+		
+	}
+	else if(Command("CONFIG"))
+	{
+		UWQ_ConfigWQ();
+		U_Printf("已经重新配置 \r\n");
 	}
 	
 	//结束
