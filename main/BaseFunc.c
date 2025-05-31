@@ -32,13 +32,13 @@ void Start_Func(void)
   */
 void Start_LEDInit(void)
 {
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC,ENABLE);
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB,ENABLE);
 	GPIO_InitTypeDef GPIO_InitStruct;
 	GPIO_InitStruct.GPIO_Mode = GPIO_Mode_Out_PP;
-	GPIO_InitStruct.GPIO_Pin = GPIO_Pin_13;
+	GPIO_InitStruct.GPIO_Pin = GPIO_Pin_10;
 	GPIO_InitStruct.GPIO_Speed = GPIO_Speed_50MHz;
-	GPIO_Init(GPIOC,&GPIO_InitStruct);
-	U_Printf("LED(PC13)初始化完成 \r\n");
+	GPIO_Init(GPIOB,&GPIO_InitStruct);
+	U_Printf("LED(PB10)初始化完成 \r\n");
 }
 /**@brief  看门狗初始化
   *@param  wdg_ms 看门狗复位毫秒数
@@ -67,9 +67,9 @@ void Start_LEDTask(void* pvParameters)
 	while(1)
 	{
 		IWDG_ReloadCounter();
-		GPIO_WriteBit(GPIOC,GPIO_Pin_13,Bit_RESET);
+		GPIO_WriteBit(GPIOB,GPIO_Pin_10,Bit_RESET);
 		vTaskDelay(400);
-		GPIO_WriteBit(GPIOC,GPIO_Pin_13,Bit_SET);
+		GPIO_WriteBit(GPIOB,GPIO_Pin_10,Bit_SET);
 		vTaskDelay(600);
 	}
 }
