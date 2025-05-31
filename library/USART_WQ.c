@@ -1,6 +1,7 @@
 #include "stm32f10x.h"                  // Device header
 #include "USART_WQ.h"
 #include "W25Q64.h"
+#include "U_USART1.h"
 
 uint8_t uwq_buff[256];
 uint16_t uwq_count = 0;
@@ -41,8 +42,8 @@ void UWQ_Init(void)
 	NVIC_InitTypeDef NVIC_InitStruct;
 	NVIC_InitStruct.NVIC_IRQChannel = USART2_IRQn;
 	NVIC_InitStruct.NVIC_IRQChannelCmd = ENABLE;
-	NVIC_InitStruct.NVIC_IRQChannelPreemptionPriority = 2;
-	NVIC_InitStruct.NVIC_IRQChannelSubPriority = 2;
+	NVIC_InitStruct.NVIC_IRQChannelPreemptionPriority = 6;
+	NVIC_InitStruct.NVIC_IRQChannelSubPriority = 6;
 	NVIC_Init(&NVIC_InitStruct);
 	//设置空闲中断
 	USART_ITConfig(USART2,USART_IT_RXNE,ENABLE);
@@ -51,9 +52,9 @@ void UWQ_Init(void)
 	UWQ_Words("Hello!!!这里是USART2 \r\n");
 }
 
-void UWQ_ConfigWQ(void)
+void UWQ_ConfigWQ(uint8_t addr)
 {
-	U_wq = WQ_Open(5,wq_state_write);
+	U_wq = WQ_Open(addr,wq_state_write);
 }
 
 void USART2_IRQHandler(void)
@@ -75,11 +76,15 @@ void USART2_IRQHandler(void)
 		USART2->SR;
 		USART2->DR;
 		
-		UWQ_Words("处理完成 \r\n");
-		WQ_Close(U_wq);
+//		UWQ_Words("a \r\n");
+		U_Printf("UWQ处理完成 \r\n");
+//		WQ_Close(U_wq);
 	}
 }
-
+void UWQ_EndCFG(void)
+{
+	WQ_Close(U_wq);
+}
 void UWQ_Putchar(uint8_t _char)
 {
 	while(USART_GetFlagStatus(USART2,USART_FLAG_TXE)!=SET);

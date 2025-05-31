@@ -54,8 +54,8 @@ void U_USART1_Init(void)
 	NVIC_InitTypeDef NVIC_InitStruct;
 	NVIC_InitStruct.NVIC_IRQChannel = USART1_IRQn;
 	NVIC_InitStruct.NVIC_IRQChannelCmd = ENABLE;
-	NVIC_InitStruct.NVIC_IRQChannelPreemptionPriority = 5;
-	NVIC_InitStruct.NVIC_IRQChannelSubPriority = 5;
+	NVIC_InitStruct.NVIC_IRQChannelPreemptionPriority = 7;
+	NVIC_InitStruct.NVIC_IRQChannelSubPriority = 7;
 	NVIC_Init(&NVIC_InitStruct);
 	//设置空闲中断
 	USART_ITConfig(USART1,USART_IT_IDLE,ENABLE);

@@ -13,6 +13,7 @@
 #include "TFT_ST7735.h"
 #include "W25Q64.h"
 #include "USART_WQ.h"
+#include "WQ_BMP.h"
 
 /**@brief  初始化线程
   */
@@ -21,9 +22,10 @@ void Start_MainTask(void* pvParameters)
 	//启动内容
 	Start_Func();
 		//初始化函数-格式建议用Init_Xxx
-	Init_TFT();
-	Init_WQ();
+//	Init_TFT();
+//	Init_WQ();
 	UWQ_Init();
+	Init_WBMP();
 	
 	//进入临界区
 	taskENTER_CRITICAL();
@@ -70,15 +72,21 @@ uint8_t Start_CommandFunc(void)
 		while(WQ_Read(&c_wq,&data,1)!=-1)
 		{
 			U_Printf("%c",data);
-		}
-		
-		
-		
+		}		
+	}
+	else if(Command("WBMP"))
+	{
+		Cmd_WBMP();
 	}
 	else if(Command("CONFIG"))
 	{
-		UWQ_ConfigWQ();
+		UWQ_ConfigWQ(1);
 		U_Printf("已经重新配置 \r\n");
+	}
+	else if(Command("ENDCFG"))
+	{
+		UWQ_EndCFG();
+		U_Printf("配置结束 \r\n");
 	}
 	
 	//结束

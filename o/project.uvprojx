@@ -855,6 +855,16 @@
               <FileType>5</FileType>
               <FilePath>..\library\USART_WQ.h</FilePath>
             </File>
+            <File>
+              <FileName>WQ_BMP.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\library\WQ_BMP.c</FilePath>
+            </File>
+            <File>
+              <FileName>WQ_BMP.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\library\WQ_BMP.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

@@ -9,5 +9,6 @@ void TFT_WriteData16(uint16_t data);
 uint16_t TFT_RGB888To565(uint32_t RGB888);
 void Cmd_TFT_XYTest(void);
 void TFT_SetXY(uint8_t x,uint8_t y,uint8_t x_y);
+void TFT_WriteData(uint8_t data);
 
 #endif

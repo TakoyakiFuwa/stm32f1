@@ -85,7 +85,7 @@ void Init_WQ(void)
 	GPIO_InitTypeDef GPIO_InitStruct;
 	GPIO_InitStruct.GPIO_Mode = GPIO_Mode_Out_PP;
 	GPIO_InitStruct.GPIO_Pin  = GPIO_Pin_0|GPIO_Pin_1|GPIO_Pin_4;
-	GPIO_InitStruct.GPIO_Speed = GPIO_Speed_2MHz;	//感觉不对，引脚速度太快会不会跟不上
+	GPIO_InitStruct.GPIO_Speed = GPIO_Speed_50MHz;	//感觉不对，引脚速度太快会不会跟不上
 	GPIO_Init(GPIOA,&GPIO_InitStruct);
 	GPIO_InitStruct.GPIO_Pin = GPIO_Pin_5|GPIO_Pin_7;
 	GPIO_Init(GPIOB,&GPIO_InitStruct);
@@ -97,13 +97,8 @@ void Init_WQ(void)
 	PIN_WQ_CLK_L();
 	PIN_WQ_WP_H();	//写保护建议一直给高就行
 	PIN_WQ_RST_H();	//复位也一直给高
-		//因为引脚不够用，这里测试时专门整个引脚做GND
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC,ENABLE);
-	GPIO_InitStruct.GPIO_Mode = GPIO_Mode_Out_PP;
-	GPIO_InitStruct.GPIO_Pin = GPIO_Pin_14;
-	GPIO_InitStruct.GPIO_Speed = GPIO_Speed_2MHz;
-	GPIO_Init(GPIOC,&GPIO_InitStruct);
-	GPIO_WriteBit(GPIOC,GPIO_Pin_14,Bit_RESET);
+	
+	U_Printf("W25Q64初始化完成 \r\n");
 }
 /**@brief  SPI开始通信
   */
@@ -464,16 +459,10 @@ void Cmd_WQ(void)
 {
 	WQ_Erease(0x000);
 	WQ_Waiting();
-	WQ_WriteIndex(0,0x010,0);
-	WQ_WriteIndex(1,0x010,0);
-	WQ_WriteIndex(2,0x010,0);
-	WQ_WriteIndex(3,0x010,0);
-	WQ_WriteIndex(4,0x010,0);
-	WQ_WriteIndex(5,0x010,0);
-	WQ_WriteIndex(6,0x010,0);
-	WQ_WriteIndex(7,0x010,0);
-	WQ_WriteIndex(8,0x010,0);
-	WQ_WriteIndex(9,0x010,0);
+	for(int i=0;i<16;i++)
+	{
+		WQ_WriteIndex(i,0x010,0);
+	}
 	WQ_Waiting();
 	WQ_PrintfIndex();
 
