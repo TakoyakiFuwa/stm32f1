@@ -99,7 +99,7 @@ static void Init_TFTPin(void)
   *@retval void
   */
 static void TFT_SoftwareInit(void);
-void Init_TFT(void)
+ void Init_TFT(void)
 {
 	Init_TFTPin();
 		//CS	  -1(不选中)

@@ -22,10 +22,10 @@ void Start_MainTask(void* pvParameters)
 	//启动内容
 	Start_Func();
 		//初始化函数-格式建议用Init_Xxx
-//	Init_TFT();
-//	Init_WQ();
-	UWQ_Init();
-	Init_WBMP();
+	Init_TFT();
+	Init_WQ();
+//	UWQ_Init();
+//	Init_WBMP();
 	
 	//进入临界区
 	taskENTER_CRITICAL();

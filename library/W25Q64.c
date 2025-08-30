@@ -97,6 +97,8 @@ void Init_WQ(void)
 	PIN_WQ_CLK_L();
 	PIN_WQ_WP_H();	//写保护建议一直给高就行
 	PIN_WQ_RST_H();	//复位也一直给高
+	//读取0x9431
+	Cmd_WQ();
 	
 	U_Printf("W25Q64初始化完成 \r\n");
 }
@@ -457,14 +459,26 @@ void WQ_Close(wq_memory ptr)
   */
 void Cmd_WQ(void)
 {
-	WQ_Erease(0x000);
-	WQ_Waiting();
-	for(int i=0;i<16;i++)
+//	WQ_Erease(0x000);
+//	WQ_Waiting();
+//	for(int i=0;i<16;i++)
+//	{
+//		WQ_WriteIndex(i,0x010,0);
+//	}
+//	WQ_Waiting();
+//	WQ_PrintfIndex();
+	
+	
+	
+	WQ_Start();
+	WQ_Swap(0x9F);
+	uint8_t aaa;
+	for(int i=0;i<3;i++)
 	{
-		WQ_WriteIndex(i,0x010,0);
+		aaa = WQ_Swap(0xFF);
+		U_Printf("%h \t",aaa);
 	}
-	WQ_Waiting();
-	WQ_PrintfIndex();
+	WQ_Stop();
 
 //	uint8_t data[5] = {72,3,12,32,66};
 //	wq_memory ptr = WQ_Open(5,wq_state_write);
