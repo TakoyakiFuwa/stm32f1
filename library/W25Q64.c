@@ -449,8 +449,8 @@ void WQ_Close(wq_memory ptr)
 	{
 		return;
 	}
-	WQ_PrintfPTR(ptr);
-	WQ_ChangeIndex(ptr.addr,ptr.size,ptr.delay_time);
+//	WQ_PrintfPTR(ptr);
+//	WQ_ChangeIndex(ptr.addr,ptr.size,ptr.delay_time);
 }
 
 /**@brief  测试接口 可用9f读取ID:-> EF 4017
@@ -466,6 +466,18 @@ void Cmd_WQ(void)
 	WQ_Waiting();
 	WQ_PrintfIndex();
 
+	
+//	WQ_Start();
+//	WQ_Swap(0x9F);
+//	uint8_t aaa;
+//	for(int i=0;i<3;i++)
+//	{
+//		aaa = WQ_Swap(0xFF);
+//		U_Printf("%h \t",aaa);
+//	}
+//	WQ_Stop();
+
+	
 //	uint8_t data[5] = {72,3,12,32,66};
 //	wq_memory ptr = WQ_Open(5,wq_state_write);
 //	WQ_Write(&ptr,data,5);

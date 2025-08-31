@@ -258,8 +258,8 @@ void TFT_SetRect(uint16_t x,uint16_t y,uint16_t width,uint16_t hight)
   */
 void TFT_Clear(uint16_t RGB)
 {
-	TFT_SetRect(0,0,160,128);
-	for(int i=0;i<128*160;i++)
+	TFT_SetRect(0,0,180,140);
+	for(int i=0;i<180*140;i++)
 	{
 		TFT_WriteData16(RGB);
 	}
@@ -379,7 +379,7 @@ static void TFT_SoftwareInit(void)
 	//0xC0(1100 0000)->(Y反转-X反转-XY不调换-0 0000)
 	//0110 0000
 	TFT_WriteCmd(0x36); //MX, MY, RGB mode 
-	TFT_WriteData(0x60); 
+	TFT_WriteData(0xE0); //0110
 	
 	//ST7735R Gamma Sequence
 	TFT_WriteCmd(0xe0); 

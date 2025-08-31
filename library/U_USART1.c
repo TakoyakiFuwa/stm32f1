@@ -1,8 +1,12 @@
 #include "stm32f10x.h"                  // Device header
+#include "U_USART1.h"
 
 uint8_t usart1_buff[256];
 uint16_t usart1_count = 0;
 int8_t usart1_isbuff = 0;
+int8_t cmdORdata = 0;
+
+USART_InitTypeDef USART_InitStruct;
 
 void U_USART1_Init(void)
 {
@@ -22,8 +26,7 @@ void U_USART1_Init(void)
 	GPIO_Init(GPIOA,&GPIO_InitStruct);
 	//外设初始化
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1,ENABLE);
-	USART_InitTypeDef USART_InitStruct;
-	USART_InitStruct.USART_BaudRate = 9600;
+	USART_InitStruct.USART_BaudRate = 4800;
 	USART_InitStruct.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
 	USART_InitStruct.USART_Mode = USART_Mode_Rx|USART_Mode_Tx;
 	USART_InitStruct.USART_Parity = USART_Parity_No;
@@ -61,23 +64,42 @@ void U_USART1_Init(void)
 	USART_ITConfig(USART1,USART_IT_IDLE,ENABLE);
 }
 
+#include "W25Q64.h"
+extern wq_memory wq;
 void USART1_IRQHandler(void)
 {
-	
 	if(USART_GetITStatus(USART1,USART_IT_IDLE)==SET)
 	{
-		//获取数据数量(254->DMA_BufferSize)
-		usart1_count = 254 - DMA_GetCurrDataCounter(DMA1_Channel5);
-		usart1_buff[usart1_count++] = '\0';
-		//重装DMA
-		DMA_Cmd(DMA1_Channel5,DISABLE);
-		DMA_SetCurrDataCounter(DMA1_Channel5,254);
-		DMA_Cmd(DMA1_Channel5,ENABLE);
-		//置标志位
-		usart1_isbuff = 1;
+		if(!cmdORdata)
+		{
+			//获取数据数量(254->DMA_BufferSize)
+			usart1_count = 254 - DMA_GetCurrDataCounter(DMA1_Channel5);
+			usart1_buff[usart1_count++] = '\0';
+			//重装DMA
+			DMA_Cmd(DMA1_Channel5,DISABLE);
+			DMA_SetCurrDataCounter(DMA1_Channel5,254);
+			DMA_Cmd(DMA1_Channel5,ENABLE);
+			//置标志位
+			usart1_isbuff = 1;
+		}
+		else
+		{//文件写入完成，关闭文件，更改标志位
+				//配置中断
+			USART_ITConfig(USART1,USART_IT_RXNE,DISABLE);
+			U_USART1_Init();
+			cmdORdata = 0;
+			U_Printf("DataEnd");
+		}
 		//清除IDLE标志位
 		USART1->SR;
 		USART1->DR;
+	}
+	else if(USART_GetITStatus(USART1,USART_IT_RXNE)==SET)
+	{
+		uint8_t data = USART_ReceiveData(USART1);
+		WQ_Write(&wq,&data,1);
+		//清除RXNE标志位
+		USART_ClearITPendingBit(USART1,USART_IT_RXNE);
 	}
 }
 

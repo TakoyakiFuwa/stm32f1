@@ -87,6 +87,7 @@ void Start_CommandInit(void)
   *@retval void
   */
 extern int8_t usart1_isbuff;
+extern uint8_t usart1_buff[256];
 void Start_CommandTask(void* pvParameters)
 {
 	while(1)
@@ -129,7 +130,7 @@ void Start_CommandTask(void* pvParameters)
 		}
 		else
 		{
-			U_Printf("指令错误 \r\n建议使用'COMMAND'或者'HELP' \r\n");
+			U_Printf("[%s]指令错误 \r\n建议使用'COMMAND'或者'HELP' \r\n",usart1_buff);
 		}
 		usart1_isbuff=0;
 	}

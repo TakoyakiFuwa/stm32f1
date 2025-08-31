@@ -52,10 +52,6 @@ void UWQ_Init(void)
 	UWQ_Words("Hello!!!这里是USART2 \r\n");
 }
 
-void UWQ_ConfigWQ(uint8_t addr)
-{
-	U_wq = WQ_Open(addr,wq_state_write);
-}
 
 void USART2_IRQHandler(void)
 {
