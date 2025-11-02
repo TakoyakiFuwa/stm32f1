@@ -4,7 +4,7 @@
   * @author  MCD Application Team
   * @version V4.1.0
   * @date    26-May-2017
-  * @brief   All processing related to Joystick Mouse Demo
+  * @brief   All processing related to QYHID Mouse Demo
   ******************************************************************************
   * @attention
   *
@@ -57,62 +57,62 @@ DEVICE Device_Table =
 
 DEVICE_PROP Device_Property =
   {
-    Joystick_init,
-    Joystick_Reset,
-    Joystick_Status_In,
-    Joystick_Status_Out,
-    Joystick_Data_Setup,
-    Joystick_NoData_Setup,
-    Joystick_Get_Interface_Setting,
-    Joystick_GetDeviceDescriptor,
-    Joystick_GetConfigDescriptor,
-    Joystick_GetStringDescriptor,
+    QYHID_init,
+    QYHID_Reset,
+    QYHID_Status_In,
+    QYHID_Status_Out,
+    QYHID_Data_Setup,
+    QYHID_NoData_Setup,
+    QYHID_Get_Interface_Setting,
+    QYHID_GetDeviceDescriptor,
+    QYHID_GetConfigDescriptor,
+    QYHID_GetStringDescriptor,
     0,
     0x40 /*MAX PACKET SIZE*/
   };
 USER_STANDARD_REQUESTS User_Standard_Requests =
   {
-    Joystick_GetConfiguration,
-    Joystick_SetConfiguration,
-    Joystick_GetInterface,
-    Joystick_SetInterface,
-    Joystick_GetStatus,
-    Joystick_ClearFeature,
-    Joystick_SetEndPointFeature,
-    Joystick_SetDeviceFeature,
-    Joystick_SetDeviceAddress
+    QYHID_GetConfiguration,
+    QYHID_SetConfiguration,
+    QYHID_GetInterface,
+    QYHID_SetInterface,
+    QYHID_GetStatus,
+    QYHID_ClearFeature,
+    QYHID_SetEndPointFeature,
+    QYHID_SetDeviceFeature,
+    QYHID_SetDeviceAddress
   };
 
 ONE_DESCRIPTOR Device_Descriptor =
   {
-    (uint8_t*)Joystick_DeviceDescriptor,
+    (uint8_t*)QYHID_DeviceDescriptor,
     JOYSTICK_SIZ_DEVICE_DESC
   };
 
 ONE_DESCRIPTOR Config_Descriptor =
   {
-    (uint8_t*)Joystick_ConfigDescriptor,
+    (uint8_t*)QYHID_ConfigDescriptor,
     JOYSTICK_SIZ_CONFIG_DESC
   };
 
-ONE_DESCRIPTOR Joystick_Report_Descriptor =
+ONE_DESCRIPTOR QYHID_Report_Descriptor =
   {
-    (uint8_t *)Joystick_ReportDescriptor,
+    (uint8_t *)QYHID_ReportDescriptor,
     JOYSTICK_SIZ_REPORT_DESC
   };
 
 ONE_DESCRIPTOR Mouse_Hid_Descriptor =
   {
-    (uint8_t*)Joystick_ConfigDescriptor + JOYSTICK_OFF_HID_DESC,
+    (uint8_t*)QYHID_ConfigDescriptor + JOYSTICK_OFF_HID_DESC,
     JOYSTICK_SIZ_HID_DESC
   };
 
 ONE_DESCRIPTOR String_Descriptor[4] =
   {
-    {(uint8_t*)Joystick_StringLangID, JOYSTICK_SIZ_STRING_LANGID},
-    {(uint8_t*)Joystick_StringVendor, JOYSTICK_SIZ_STRING_VENDOR},
-    {(uint8_t*)Joystick_StringProduct, JOYSTICK_SIZ_STRING_PRODUCT},
-    {(uint8_t*)Joystick_StringSerial, JOYSTICK_SIZ_STRING_SERIAL}
+    {(uint8_t*)QYHID_StringLangID, JOYSTICK_SIZ_STRING_LANGID},
+    {(uint8_t*)QYHID_StringVendor, JOYSTICK_SIZ_STRING_VENDOR},
+    {(uint8_t*)QYHID_StringProduct, JOYSTICK_SIZ_STRING_PRODUCT},
+    {(uint8_t*)QYHID_StringSerial, JOYSTICK_SIZ_STRING_SERIAL}
   };
 
 /* Extern variables ----------------------------------------------------------*/
@@ -121,13 +121,13 @@ ONE_DESCRIPTOR String_Descriptor[4] =
 /* Private functions ---------------------------------------------------------*/
 
 /**
-  * Function Name  : Joystick_init.
-  * Description    : Joystick Mouse init routine.
+  * Function Name  : QYHID_init.
+  * Description    : QYHID Mouse init routine.
   * Input          : None.
   * Output         : None.
   * Return         : None.
   */
-void Joystick_init(void)
+void QYHID_init(void)
 {
   /* Update the serial number string descriptor with the data from the unique
   ID*/
@@ -146,20 +146,20 @@ void Joystick_init(void)
 }
 
 /**
-  * Function Name  : Joystick_Reset.
-  * Description    : Joystick Mouse reset routine.
+  * Function Name  : QYHID_Reset.
+  * Description    : QYHID Mouse reset routine.
   * Input          : None.
   * Output         : None.
   * Return         : None.
   */
-void Joystick_Reset(void)
+void QYHID_Reset(void)
 {
-  /* Set Joystick_DEVICE as not configured */
+  /* Set QYHID_DEVICE as not configured */
   pInformation->Current_Configuration = 0;
   pInformation->Current_Interface = 0;/*the default Interface*/
 
   /* Current Feature initialization */
-  pInformation->Current_Feature = Joystick_ConfigDescriptor[7];
+  pInformation->Current_Feature = QYHID_ConfigDescriptor[7];
   SetBTABLE(BTABLE_ADDRESS);
   /* Initialize Endpoint 0 */
   SetEPType(ENDP0, EP_CONTROL);
@@ -183,13 +183,13 @@ void Joystick_Reset(void)
 }
 
 /**
-  * Function Name  : Joystick_SetConfiguration.
+  * Function Name  : QYHID_SetConfiguration.
   * Description    : Update the device state to configured.
   * Input          : None.
   * Output         : None.
   * Return         : None.
   */
-void Joystick_SetConfiguration(void)
+void QYHID_SetConfiguration(void)
 {
   DEVICE_INFO *pInfo = &Device_Info;
 
@@ -201,44 +201,44 @@ void Joystick_SetConfiguration(void)
 }
 
 /**
-  * Function Name  : Joystick_SetConfiguration.
+  * Function Name  : QYHID_SetConfiguration.
   * Description    : Update the device state to addressed.
   * Input          : None.
   * Output         : None.
   * Return         : None.
   */
-void Joystick_SetDeviceAddress (void)
+void QYHID_SetDeviceAddress (void)
 {
   bDeviceState = ADDRESSED;
 }
 /**
-  * Function Name  : Joystick_Status_In.
-  * Description    : Joystick status IN routine.
+  * Function Name  : QYHID_Status_In.
+  * Description    : QYHID status IN routine.
   * Input          : None.
   * Output         : None.
   * Return         : None.
   */
-void Joystick_Status_In(void)
+void QYHID_Status_In(void)
 {}
 
 /**
-  * Function Name  : Joystick_Status_Out
-  * Description    : Joystick status OUT routine.
+  * Function Name  : QYHID_Status_Out
+  * Description    : QYHID status OUT routine.
   * Input          : None.
   * Output         : None.
   * Return         : None.
   */
-void Joystick_Status_Out (void)
+void QYHID_Status_Out (void)
 {}
 
 /**
-  * Function Name  : Joystick_Data_Setup
+  * Function Name  : QYHID_Data_Setup
   * Description    : Handle the data class specific requests.
   * Input          : Request Nb.
   * Output         : None.
   * Return         : USB_UNSUPPORT or USB_SUCCESS.
   */
-RESULT Joystick_Data_Setup(uint8_t RequestNo)
+RESULT QYHID_Data_Setup(uint8_t RequestNo)
 {
   uint8_t *(*CopyRoutine)(uint16_t);
 
@@ -249,11 +249,11 @@ RESULT Joystick_Data_Setup(uint8_t RequestNo)
   {
     if (pInformation->USBwValue1 == REPORT_DESCRIPTOR)
     {
-      CopyRoutine = Joystick_GetReportDescriptor;
+      CopyRoutine = QYHID_GetReportDescriptor;
     }
     else if (pInformation->USBwValue1 == HID_DESCRIPTOR_TYPE)
     {
-      CopyRoutine = Joystick_GetHIDDescriptor;
+      CopyRoutine = QYHID_GetHIDDescriptor;
     }
 
   } /* End of GET_DESCRIPTOR */
@@ -262,7 +262,7 @@ RESULT Joystick_Data_Setup(uint8_t RequestNo)
   else if ((Type_Recipient == (CLASS_REQUEST | INTERFACE_RECIPIENT))
            && RequestNo == GET_PROTOCOL)
   {
-    CopyRoutine = Joystick_GetProtocolValue;
+    CopyRoutine = QYHID_GetProtocolValue;
   }
   if (CopyRoutine == NULL)
   {
@@ -275,18 +275,18 @@ RESULT Joystick_Data_Setup(uint8_t RequestNo)
 }
 
 /**
-  * Function Name  : Joystick_NoData_Setup
+  * Function Name  : QYHID_NoData_Setup
   * Description    : handle the no data class specific requests
   * Input          : Request Nb.
   * Output         : None.
   * Return         : USB_UNSUPPORT or USB_SUCCESS.
   */
-RESULT Joystick_NoData_Setup(uint8_t RequestNo)
+RESULT QYHID_NoData_Setup(uint8_t RequestNo)
 {
   if ((Type_Recipient == (CLASS_REQUEST | INTERFACE_RECIPIENT))
       && (RequestNo == SET_PROTOCOL))
   {
-    return Joystick_SetProtocol();
+    return QYHID_SetProtocol();
   }
 
   else
@@ -296,37 +296,37 @@ RESULT Joystick_NoData_Setup(uint8_t RequestNo)
 }
 
 /**
-  * Function Name  : Joystick_GetDeviceDescriptor.
+  * Function Name  : QYHID_GetDeviceDescriptor.
   * Description    : Gets the device descriptor.
   * Input          : Length
   * Output         : None.
   * Return         : The address of the device descriptor.
   */
-uint8_t *Joystick_GetDeviceDescriptor(uint16_t Length)
+uint8_t *QYHID_GetDeviceDescriptor(uint16_t Length)
 {
   return Standard_GetDescriptorData(Length, &Device_Descriptor);
 }
 
 /**
-  * Function Name  : Joystick_GetConfigDescriptor.
+  * Function Name  : QYHID_GetConfigDescriptor.
   * Description    : Gets the configuration descriptor.
   * Input          : Length
   * Output         : None.
   * Return         : The address of the configuration descriptor.
   */
-uint8_t *Joystick_GetConfigDescriptor(uint16_t Length)
+uint8_t *QYHID_GetConfigDescriptor(uint16_t Length)
 {
   return Standard_GetDescriptorData(Length, &Config_Descriptor);
 }
 
 /**
-  * Function Name  : Joystick_GetStringDescriptor
+  * Function Name  : QYHID_GetStringDescriptor
   * Description    : Gets the string descriptors according to the needed index
   * Input          : Length
   * Output         : None.
   * Return         : The address of the string descriptors.
   */
-uint8_t *Joystick_GetStringDescriptor(uint16_t Length)
+uint8_t *QYHID_GetStringDescriptor(uint16_t Length)
 {
   uint8_t wValue0 = pInformation->USBwValue0;
   if (wValue0 >= 4)
@@ -340,31 +340,31 @@ uint8_t *Joystick_GetStringDescriptor(uint16_t Length)
 }
 
 /**
-  * Function Name  : Joystick_GetReportDescriptor.
+  * Function Name  : QYHID_GetReportDescriptor.
   * Description    : Gets the HID report descriptor.
   * Input          : Length
   * Output         : None.
   * Return         : The address of the configuration descriptor.
   */
-uint8_t *Joystick_GetReportDescriptor(uint16_t Length)
+uint8_t *QYHID_GetReportDescriptor(uint16_t Length)
 {
-  return Standard_GetDescriptorData(Length, &Joystick_Report_Descriptor);
+  return Standard_GetDescriptorData(Length, &QYHID_Report_Descriptor);
 }
 
 /**
-  * Function Name  : Joystick_GetHIDDescriptor.
+  * Function Name  : QYHID_GetHIDDescriptor.
   * Description    : Gets the HID descriptor.
   * Input          : Length
   * Output         : None.
   * Return         : The address of the configuration descriptor.
   */
-uint8_t *Joystick_GetHIDDescriptor(uint16_t Length)
+uint8_t *QYHID_GetHIDDescriptor(uint16_t Length)
 {
   return Standard_GetDescriptorData(Length, &Mouse_Hid_Descriptor);
 }
 
 /**
-  * Function Name  : Joystick_Get_Interface_Setting.
+  * Function Name  : QYHID_Get_Interface_Setting.
   * Description    : tests the interface and the alternate setting according to the
   *                  supported one.
   * Input          : - Interface : interface number.
@@ -372,7 +372,7 @@ uint8_t *Joystick_GetHIDDescriptor(uint16_t Length)
   * Output         : None.
   * Return         : USB_SUCCESS or USB_UNSUPPORT.
   */
-RESULT Joystick_Get_Interface_Setting(uint8_t Interface, uint8_t AlternateSetting)
+RESULT QYHID_Get_Interface_Setting(uint8_t Interface, uint8_t AlternateSetting)
 {
   if (AlternateSetting > 0)
   {
@@ -386,13 +386,13 @@ RESULT Joystick_Get_Interface_Setting(uint8_t Interface, uint8_t AlternateSettin
 }
 
 /**
-  * Function Name  : Joystick_SetProtocol
-  * Description    : Joystick Set Protocol request routine.
+  * Function Name  : QYHID_SetProtocol
+  * Description    : QYHID Set Protocol request routine.
   * Input          : None.
   * Output         : None.
   * Return         : USB SUCCESS.
   */
-RESULT Joystick_SetProtocol(void)
+RESULT QYHID_SetProtocol(void)
 {
   uint8_t wValue0 = pInformation->USBwValue0;
   ProtocolValue = wValue0;
@@ -400,13 +400,13 @@ RESULT Joystick_SetProtocol(void)
 }
 
 /**
-  * Function Name  : Joystick_GetProtocolValue
+  * Function Name  : QYHID_GetProtocolValue
   * Description    : get the protocol value
   * Input          : Length.
   * Output         : None.
   * Return         : address of the protocol value.
   */
-uint8_t *Joystick_GetProtocolValue(uint16_t Length)
+uint8_t *QYHID_GetProtocolValue(uint16_t Length)
 {
   if (Length == 0)
   {

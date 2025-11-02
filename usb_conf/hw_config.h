@@ -41,7 +41,7 @@
 #define __HW_CONFIG_H
 
 /* Includes ------------------------------------------------------------------*/
-#include "platform_config.h"
+#include "stm32f10x.h"                  // Device header
 #include "usb_type.h"
 #include "usb_lib.h"
 #include "usb_desc.h"
@@ -51,24 +51,13 @@
 /* Exported constants --------------------------------------------------------*/
 /* Exported macro ------------------------------------------------------------*/
 /* Exported define -----------------------------------------------------------*/
-#define CURSOR_STEP     5
-#define DOWN            2
-#define LEFT            3
-#define RIGHT           4
-#define UP              5
 
 /* Exported functions ------------------------------------------------------- */
-void Set_System(void);
-void Set_USBClock(void);
-void GPIO_AINConfig(void);
-void Enter_LowPowerMode(void);
-void Leave_LowPowerMode(void);
-void USB_Interrupts_Config(void);
-void USB_Cable_Config (FunctionalState NewState);
-void Joystick_Send(uint8_t Keys);
-uint8_t JoyState(void);
+
+void Init_USB(void);
+void USB_KeyBoard(uint8_t KBH_xxx,uint8_t KB_xxx);
+//void USB_KeyBoard_OFF(void);
 void Get_SerialNum(void);
-void Joy_Emul(void);
 
 #endif  /*__HW_CONFIG_H*/
 

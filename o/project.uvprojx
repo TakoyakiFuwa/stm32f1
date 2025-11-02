@@ -341,7 +341,7 @@
               <MiscControls>--diag_suppress=870</MiscControls>
               <Define>USE_STDPERIPH_DRIVER,USE_STM3210E_EVAL</Define>
               <Undefine></Undefine>
-              <IncludePath>..\st_core;..\st_lib;..\os_src;..\library;..\main;..\usb</IncludePath>
+              <IncludePath>..\st_core;..\st_lib;..\os_src;..\library;..\main;..\usb_conf;..\usb_core</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -701,11 +701,6 @@
               <FilePath>..\os_src\FreeRTOS.h</FilePath>
             </File>
             <File>
-              <FileName>FreeRTOSConfig.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\os_src\FreeRTOSConfig.h</FilePath>
-            </File>
-            <File>
               <FileName>heap_4.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\os_src\heap_4.c</FilePath>
@@ -813,6 +808,126 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>usb_core</GroupName>
+          <Files>
+            <File>
+              <FileName>usb_conf.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\usb_core\usb_conf.h</FilePath>
+            </File>
+            <File>
+              <FileName>usb_core.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\usb_core\usb_core.c</FilePath>
+            </File>
+            <File>
+              <FileName>usb_core.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\usb_core\usb_core.h</FilePath>
+            </File>
+            <File>
+              <FileName>usb_def.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\usb_core\usb_def.h</FilePath>
+            </File>
+            <File>
+              <FileName>usb_endp.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\usb_core\usb_endp.c</FilePath>
+            </File>
+            <File>
+              <FileName>usb_init.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\usb_core\usb_init.c</FilePath>
+            </File>
+            <File>
+              <FileName>usb_init.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\usb_core\usb_init.h</FilePath>
+            </File>
+            <File>
+              <FileName>usb_int.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\usb_core\usb_int.c</FilePath>
+            </File>
+            <File>
+              <FileName>usb_int.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\usb_core\usb_int.h</FilePath>
+            </File>
+            <File>
+              <FileName>usb_istr.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\usb_core\usb_istr.c</FilePath>
+            </File>
+            <File>
+              <FileName>usb_istr.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\usb_core\usb_istr.h</FilePath>
+            </File>
+            <File>
+              <FileName>usb_lib.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\usb_core\usb_lib.h</FilePath>
+            </File>
+            <File>
+              <FileName>usb_mem.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\usb_core\usb_mem.c</FilePath>
+            </File>
+            <File>
+              <FileName>usb_mem.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\usb_core\usb_mem.h</FilePath>
+            </File>
+            <File>
+              <FileName>usb_prop.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\usb_core\usb_prop.c</FilePath>
+            </File>
+            <File>
+              <FileName>usb_prop.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\usb_core\usb_prop.h</FilePath>
+            </File>
+            <File>
+              <FileName>usb_pwr.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\usb_core\usb_pwr.c</FilePath>
+            </File>
+            <File>
+              <FileName>usb_pwr.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\usb_core\usb_pwr.h</FilePath>
+            </File>
+            <File>
+              <FileName>usb_regs.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\usb_core\usb_regs.c</FilePath>
+            </File>
+            <File>
+              <FileName>usb_regs.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\usb_core\usb_regs.h</FilePath>
+            </File>
+            <File>
+              <FileName>usb_sil.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\usb_core\usb_sil.c</FilePath>
+            </File>
+            <File>
+              <FileName>usb_sil.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\usb_core\usb_sil.h</FilePath>
+            </File>
+            <File>
+              <FileName>usb_type.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\usb_core\usb_type.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>library</GroupName>
           <Files>
             <File>
@@ -870,150 +985,40 @@
               <FileType>5</FileType>
               <FilePath>..\main\BaseFunc.h</FilePath>
             </File>
+            <File>
+              <FileName>FreeRTOSConfig.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\main\FreeRTOSConfig.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
-          <GroupName>USB</GroupName>
+          <GroupName>usb_conf</GroupName>
           <Files>
-            <File>
-              <FileName>hw_config.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\usb\hw_config.h</FilePath>
-            </File>
-            <File>
-              <FileName>platform_config.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\usb\platform_config.h</FilePath>
-            </File>
-            <File>
-              <FileName>usb_conf.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\usb\usb_conf.h</FilePath>
-            </File>
-            <File>
-              <FileName>usb_core.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\usb\usb_core.c</FilePath>
-            </File>
-            <File>
-              <FileName>usb_core.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\usb\usb_core.h</FilePath>
-            </File>
-            <File>
-              <FileName>usb_def.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\usb\usb_def.h</FilePath>
-            </File>
-            <File>
-              <FileName>usb_desc.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\usb\usb_desc.h</FilePath>
-            </File>
-            <File>
-              <FileName>usb_init.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\usb\usb_init.c</FilePath>
-            </File>
-            <File>
-              <FileName>usb_init.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\usb\usb_init.h</FilePath>
-            </File>
-            <File>
-              <FileName>usb_int.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\usb\usb_int.c</FilePath>
-            </File>
-            <File>
-              <FileName>usb_int.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\usb\usb_int.h</FilePath>
-            </File>
-            <File>
-              <FileName>usb_istr.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\usb\usb_istr.h</FilePath>
-            </File>
-            <File>
-              <FileName>usb_lib.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\usb\usb_lib.h</FilePath>
-            </File>
-            <File>
-              <FileName>usb_mem.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\usb\usb_mem.c</FilePath>
-            </File>
-            <File>
-              <FileName>usb_mem.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\usb\usb_mem.h</FilePath>
-            </File>
-            <File>
-              <FileName>usb_prop.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\usb\usb_prop.h</FilePath>
-            </File>
-            <File>
-              <FileName>usb_pwr.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\usb\usb_pwr.h</FilePath>
-            </File>
-            <File>
-              <FileName>usb_regs.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\usb\usb_regs.c</FilePath>
-            </File>
-            <File>
-              <FileName>usb_regs.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\usb\usb_regs.h</FilePath>
-            </File>
-            <File>
-              <FileName>usb_sil.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\usb\usb_sil.c</FilePath>
-            </File>
-            <File>
-              <FileName>usb_sil.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\usb\usb_sil.h</FilePath>
-            </File>
-            <File>
-              <FileName>usb_type.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\usb\usb_type.h</FilePath>
-            </File>
             <File>
               <FileName>hw_config.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\usb\hw_config.c</FilePath>
+              <FilePath>..\usb_conf\hw_config.c</FilePath>
+            </File>
+            <File>
+              <FileName>hw_config.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\usb_conf\hw_config.h</FilePath>
             </File>
             <File>
               <FileName>usb_desc.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\usb\usb_desc.c</FilePath>
+              <FilePath>..\usb_conf\usb_desc.c</FilePath>
             </File>
             <File>
-              <FileName>usb_endp.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\usb\usb_endp.c</FilePath>
+              <FileName>usb_desc.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\usb_conf\usb_desc.h</FilePath>
             </File>
             <File>
-              <FileName>usb_istr.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\usb\usb_istr.c</FilePath>
-            </File>
-            <File>
-              <FileName>usb_prop.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\usb\usb_prop.c</FilePath>
-            </File>
-            <File>
-              <FileName>usb_pwr.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\usb\usb_pwr.c</FilePath>
+              <FileName>Def_KeyBoard.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\usb_conf\Def_KeyBoard.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -1026,5 +1031,14 @@
     <components/>
     <files/>
   </RTE>
+
+  <LayerInfo>
+    <Layers>
+      <Layer>
+        <LayName>project</LayName>
+        <LayPrjMark>1</LayPrjMark>
+      </Layer>
+    </Layers>
+  </LayerInfo>
 
 </Project>

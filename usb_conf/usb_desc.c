@@ -4,7 +4,7 @@
   * @author  MCD Application Team
   * @version V4.1.0
   * @date    26-May-2017
-  * @brief   Descriptors for Joystick Mouse Demo
+  * @brief   Descriptors for QYHID Mouse Demo
   ******************************************************************************
   * @attention
   *
@@ -47,7 +47,7 @@
 /* Private functions ---------------------------------------------------------*/
 
 /* USB Standard Device Descriptor */
-const uint8_t Joystick_DeviceDescriptor[JOYSTICK_SIZ_DEVICE_DESC] =
+const uint8_t QYHID_DeviceDescriptor[JOYSTICK_SIZ_DEVICE_DESC] =
   {
     0x12,                       /*bLength */
     USB_DEVICE_DESCRIPTOR_TYPE, /*bDescriptorType*/
@@ -71,12 +71,12 @@ const uint8_t Joystick_DeviceDescriptor[JOYSTICK_SIZ_DEVICE_DESC] =
                                                  device serial number */
     0x01                        /*bNumConfigurations*/
   }
-  ; /* Joystick_DeviceDescriptor */
+  ; /* QYHID_DeviceDescriptor */
 
 
 /* USB Configuration Descriptor */
 /*   All Descriptors (Configuration, Interface, Endpoint, Class, Vendor */
-const uint8_t Joystick_ConfigDescriptor[JOYSTICK_SIZ_CONFIG_DESC] =
+const uint8_t QYHID_ConfigDescriptor[JOYSTICK_SIZ_CONFIG_DESC] =
   {
     0x09, /* bLength: Configuration Descriptor size */
     USB_CONFIGURATION_DESCRIPTOR_TYPE, /* bDescriptorType: Configuration */
@@ -90,7 +90,7 @@ const uint8_t Joystick_ConfigDescriptor[JOYSTICK_SIZ_CONFIG_DESC] =
     0xE0,         /*bmAttributes: Self powered */
     0x32,         /*MaxPower 100 mA: this current is used for detecting Vbus*/
 
-    /************** Descriptor of Joystick Mouse interface ****************/
+    /************** Descriptor of QYHID Mouse interface ****************/
     /* 09 */
     0x09,         /*bLength: Interface Descriptor size*/
     USB_INTERFACE_DESCRIPTOR_TYPE,/*bDescriptorType: Interface descriptor type*/
@@ -101,7 +101,7 @@ const uint8_t Joystick_ConfigDescriptor[JOYSTICK_SIZ_CONFIG_DESC] =
     0x01,         /*bInterfaceSubClass : 1=BOOT, 0=no boot*/
     0x01,         /*nInterfaceProtocol : 0=none, 1=keyboard, 2=mouse*/
     0,            /*iInterface: Index of string descriptor*/
-    /******************** Descriptor of Joystick Mouse HID ********************/
+    /******************** Descriptor of QYHID Mouse HID ********************/
     /* 18 */
     0x09,         /*bLength: HID Descriptor size*/
     HID_DESCRIPTOR_TYPE, /*bDescriptorType: HID*/
@@ -112,7 +112,7 @@ const uint8_t Joystick_ConfigDescriptor[JOYSTICK_SIZ_CONFIG_DESC] =
     0x22,         /*bDescriptorType*/
     JOYSTICK_SIZ_REPORT_DESC,/*wItemLength: Total length of Report descriptor*/						//这里....
     0x00,
-    /******************** Descriptor of Joystick Mouse endpoint ********************/
+    /******************** Descriptor of QYHID Mouse endpoint ********************/
     /* 27 */
     0x07,          /*bLength: Endpoint Descriptor size*/
     USB_ENDPOINT_DESCRIPTOR_TYPE, /*bDescriptorType:*/
@@ -126,7 +126,7 @@ const uint8_t Joystick_ConfigDescriptor[JOYSTICK_SIZ_CONFIG_DESC] =
   }
   ; /* MOUSE_ConfigDescriptor */
  
- const uint8_t Joystick_ReportDescriptor[] =
+ const uint8_t QYHID_ReportDescriptor[] =
 {
     0x05, 0x01,       /* Usage Page (Generic Desktop Controls) 
                          —— 指明本设备属于“通用桌面控制”类别，
@@ -223,97 +223,9 @@ const uint8_t Joystick_ConfigDescriptor[JOYSTICK_SIZ_CONFIG_DESC] =
                          —— 结束整个键盘集合。 */
 };
 
-//const uint8_t Joystick_ReportDescriptor[JOYSTICK_SIZ_REPORT_DESC] =
-//  {
-//    0x05,          /*Usage Page(Generic Desktop)*/
-//    0x01,
-//    0x09,          /*Usage(Mouse)*/
-//    0x02,
-//    0xA1,          /*Collection(Logical)*/
-//    0x01,
-//    0x09,          /*Usage(Pointer)*/
-//    0x01,
-//    /* 8 */
-//    0xA1,          /*Collection(Linked)*/
-//    0x00,
-//    0x05,          /*Usage Page(Buttons)*/
-//    0x09,
-//    0x19,          /*Usage Minimum(1)*/
-//    0x01,
-//    0x29,          /*Usage Maximum(3)*/
-//    0x03,
-//    /* 16 */
-//    0x15,          /*Logical Minimum(0)*/
-//    0x00,
-//    0x25,          /*Logical Maximum(1)*/
-//    0x01,
-//    0x95,          /*Report Count(3)*/
-//    0x03,
-//    0x75,          /*Report Size(1)*/
-//    0x01,
-//    /* 24 */
-//    0x81,          /*Input(Variable)*/
-//    0x02,
-//    0x95,          /*Report Count(1)*/
-//    0x01,
-//    0x75,          /*Report Size(5)*/
-//    0x05,
-//    0x81,          /*Input(Constant,Array)*/
-//    0x01,
-//    /* 32 */
-//    0x05,          /*Usage Page(Generic Desktop)*/
-//    0x01,
-//    0x09,          /*Usage(X axis)*/
-//    0x30,
-//    0x09,          /*Usage(Y axis)*/
-//    0x31,
-//    0x09,          /*Usage(Wheel)*/
-//    0x38,
-//    /* 40 */
-//    0x15,          /*Logical Minimum(-127)*/
-//    0x81,
-//    0x25,          /*Logical Maximum(127)*/
-//    0x7F,
-//    0x75,          /*Report Size(8)*/
-//    0x08,
-//    0x95,          /*Report Count(3)*/
-//    0x03,
-//    /* 48 */
-//    0x81,          /*Input(Variable, Relative)*/
-//    0x06,
-//    0xC0,          /*End Collection*/
-//    0x09,
-//    0x3c,
-//    0x05,
-//    0xff,
-//    0x09,
-//    /* 56 */
-//    0x01,
-//    0x15,
-//    0x00,
-//    0x25,
-//    0x01,
-//    0x75,
-//    0x01,
-//    0x95,
-//    /* 64 */
-//    0x02,
-//    0xb1,
-//    0x22,
-//    0x75,
-//    0x06,
-//    0x95,
-//    0x01,
-//    0xb1,
-//    /* 72 */
-//    0x01,
-//    0xc0
-//  }
-//  ; /* Joystick_ReportDescriptor */
-
 
 /* USB String Descriptors (optional) */
-const uint8_t Joystick_StringLangID[JOYSTICK_SIZ_STRING_LANGID] =
+const uint8_t QYHID_StringLangID[JOYSTICK_SIZ_STRING_LANGID] =
   {
     JOYSTICK_SIZ_STRING_LANGID,
     USB_STRING_DESCRIPTOR_TYPE,
@@ -322,7 +234,7 @@ const uint8_t Joystick_StringLangID[JOYSTICK_SIZ_STRING_LANGID] =
   }
   ; /* LangID = 0x0409: U.S. English */
 
-const uint8_t Joystick_StringVendor[JOYSTICK_SIZ_STRING_VENDOR] =
+const uint8_t QYHID_StringVendor[JOYSTICK_SIZ_STRING_VENDOR] =
   {
     JOYSTICK_SIZ_STRING_VENDOR, /* Size of Vendor string */
     USB_STRING_DESCRIPTOR_TYPE,  /* bDescriptorType*/
@@ -331,15 +243,14 @@ const uint8_t Joystick_StringVendor[JOYSTICK_SIZ_STRING_VENDOR] =
     'l', 0, 'e', 0, 'c', 0, 't', 0, 'r', 0, 'o', 0, 'n', 0, 'i', 0,
     'c', 0, 's', 0
   };
-
-const uint8_t Joystick_StringProduct[JOYSTICK_SIZ_STRING_PRODUCT] =
+const uint8_t QYHID_StringProduct[JOYSTICK_SIZ_STRING_PRODUCT] =
   {
     JOYSTICK_SIZ_STRING_PRODUCT,          /* bLength */
     USB_STRING_DESCRIPTOR_TYPE,        /* bDescriptorType */
     'S', 0, 'T', 0, 'M', 0, '3', 0, '2', 0, ' ', 0, 'J', 0,
     'o', 0, 'y', 0, 's', 0, 't', 0, 'i', 0, 'c', 0, 'k', 0
   };
-uint8_t Joystick_StringSerial[JOYSTICK_SIZ_STRING_SERIAL] =
+uint8_t QYHID_StringSerial[JOYSTICK_SIZ_STRING_SERIAL] =
   {
     JOYSTICK_SIZ_STRING_SERIAL,           /* bLength */
     USB_STRING_DESCRIPTOR_TYPE,        /* bDescriptorType */

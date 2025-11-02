@@ -73,7 +73,7 @@ RESULT PowerOn(void)
   uint16_t wRegVal;
   
   /*** cable plugged-in ? ***/
-  USB_Cable_Config(ENABLE);
+//  USB_Cable_Config(ENABLE);
 
   /*** CNTR_PWDN = 0 ***/
   wRegVal = CNTR_FRES;
@@ -119,7 +119,7 @@ RESULT PowerOff()
   
 #if !defined (USE_NUCLEO)
   /* Disable the Pull-Up*/
-  USB_Cable_Config(DISABLE);
+//  USB_Cable_Config(DISABLE);
 #endif
   /* switch-off device */
   _SetCNTR(CNTR_FRES + CNTR_PDWN);

@@ -1,10 +1,10 @@
 /**
   ******************************************************************************
-  * @file    usb_desc.h
+  * @file    usb_conf.h
   * @author  MCD Application Team
   * @version V4.1.0
   * @date    26-May-2017
-  * @brief   Descriptor Header for Joystick Mouse Demo
+  * @brief   QYHID Mouse demo configuration file
   ******************************************************************************
   * @attention
   *
@@ -37,48 +37,65 @@
 
 
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __USB_DESC_H
-#define __USB_DESC_H
+#ifndef __USB_CONF_H
+#define __USB_CONF_H
 
 /* Includes ------------------------------------------------------------------*/
-#include "usb_lib.h"
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
 /* Exported macro ------------------------------------------------------------*/
-
 /* Exported functions ------------------------------------------------------- */
-extern const uint8_t Joystick_ReportDescriptor[];
+/* External variables --------------------------------------------------------*/
+/*-------------------------------------------------------------*/
+/* EP_NUM */
+/* defines how many endpoints are used by the device */
+/*-------------------------------------------------------------*/
+#define EP_NUM     (2)
 
-/* Exported define -----------------------------------------------------------*/
-#define USB_DEVICE_DESCRIPTOR_TYPE              0x01
-#define USB_CONFIGURATION_DESCRIPTOR_TYPE       0x02
-#define USB_STRING_DESCRIPTOR_TYPE              0x03
-#define USB_INTERFACE_DESCRIPTOR_TYPE           0x04
-#define USB_ENDPOINT_DESCRIPTOR_TYPE            0x05
+/*-------------------------------------------------------------*/
+/* --------------   Buffer Description Table  -----------------*/
+/*-------------------------------------------------------------*/
+/* buffer table base address */
+/* buffer table base address */
+#define BTABLE_ADDRESS      (0x00)
 
-#define HID_DESCRIPTOR_TYPE                     0x21
-#define JOYSTICK_SIZ_HID_DESC                   0x09
-#define JOYSTICK_OFF_HID_DESC                   0x12
+/* EP0  */
+/* rx/tx buffer base address */
+#define ENDP0_RXADDR        (0x18)
+#define ENDP0_TXADDR        (0x58)
 
-#define JOYSTICK_SIZ_DEVICE_DESC                18
-#define JOYSTICK_SIZ_CONFIG_DESC                34
-#define JOYSTICK_SIZ_REPORT_DESC                63// sizeof(Joystick_ReportDescriptor)
-#define JOYSTICK_SIZ_STRING_LANGID              4
-#define JOYSTICK_SIZ_STRING_VENDOR              38
-#define JOYSTICK_SIZ_STRING_PRODUCT             30
-#define JOYSTICK_SIZ_STRING_SERIAL              26
-
-#define STANDARD_ENDPOINT_DESC_SIZE             0x09
-
-extern const uint8_t Joystick_DeviceDescriptor[JOYSTICK_SIZ_DEVICE_DESC];
-extern const uint8_t Joystick_ConfigDescriptor[JOYSTICK_SIZ_CONFIG_DESC];
-extern const uint8_t Joystick_StringLangID[JOYSTICK_SIZ_STRING_LANGID];
-extern const uint8_t Joystick_StringVendor[JOYSTICK_SIZ_STRING_VENDOR];
-extern const uint8_t Joystick_StringProduct[JOYSTICK_SIZ_STRING_PRODUCT];
-extern uint8_t Joystick_StringSerial[JOYSTICK_SIZ_STRING_SERIAL];
+/* EP1  */
+/* tx buffer base address */
+#define ENDP1_TXADDR        (0x100)
 
 
-#endif /* __USB_DESC_H */
+/*-------------------------------------------------------------*/
+/* -------------------   ISTR events  -------------------------*/
+/*-------------------------------------------------------------*/
+/* IMR_MSK */
+/* mask defining which events has to be handled */
+/* by the device application software */
+#define IMR_MSK (CNTR_CTRM  | CNTR_WKUPM | CNTR_SUSPM | CNTR_ERRM  | CNTR_SOFM \
+                 | CNTR_ESOFM | CNTR_RESETM )
 
+/* CTR service routines */
+/* associated to defined endpoints */
+/* #define  EP1_IN_Callback   NOP_Process*/
+#define  EP2_IN_Callback   NOP_Process
+#define  EP3_IN_Callback   NOP_Process
+#define  EP4_IN_Callback   NOP_Process
+#define  EP5_IN_Callback   NOP_Process
+#define  EP6_IN_Callback   NOP_Process
+#define  EP7_IN_Callback   NOP_Process
+
+#define  EP1_OUT_Callback   NOP_Process
+#define  EP2_OUT_Callback   NOP_Process
+#define  EP3_OUT_Callback   NOP_Process
+#define  EP4_OUT_Callback   NOP_Process
+#define  EP5_OUT_Callback   NOP_Process
+#define  EP6_OUT_Callback   NOP_Process
+#define  EP7_OUT_Callback   NOP_Process
+
+#endif /*__USB_CONF_H*/
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
