@@ -15,16 +15,16 @@
       <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
-          <Device>STM32F103C8</Device>
+          <Device>STM32F103C6</Device>
           <Vendor>STMicroelectronics</Vendor>
           <PackID>Keil.STM32F1xx_DFP.2.2.0</PackID>
           <PackURL>http://www.keil.com/pack/</PackURL>
-          <Cpu>IRAM(0x20000000,0x5000) IROM(0x08000000,0x10000) CPUTYPE("Cortex-M3") CLOCK(12000000) ELITTLE</Cpu>
+          <Cpu>IRAM(0x20000000,0x2800) IROM(0x08000000,0x8000) CPUTYPE("Cortex-M3") CLOCK(12000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
-          <FlashDriverDll>UL2CM3(-S0 -C0 -P0 -FD20000000 -FC1000 -FN1 -FF0STM32F10x_128 -FS08000000 -FL020000 -FP0($$Device:STM32F103C8$Flash\STM32F10x_128.FLM))</FlashDriverDll>
+          <FlashDriverDll>UL2CM3(-S0 -C0 -P0 -FD20000000 -FC1000 -FN1 -FF0STM32F10x_128 -FS08000000 -FL020000 -FP0($$Device:STM32F103C6$Flash\STM32F10x_128.FLM))</FlashDriverDll>
           <DeviceId>0</DeviceId>
-          <RegisterFile>$$Device:STM32F103C8$Device\Include\stm32f10x.h</RegisterFile>
+          <RegisterFile>$$Device:STM32F103C6$Device\Include\stm32f10x.h</RegisterFile>
           <MemoryEnv></MemoryEnv>
           <Cmp></Cmp>
           <Asm></Asm>
@@ -34,7 +34,7 @@
           <SLE66CMisc></SLE66CMisc>
           <SLE66AMisc></SLE66AMisc>
           <SLE66LinkerMisc></SLE66LinkerMisc>
-          <SFDFile>$$Device:STM32F103C8$SVD\STM32F103xx.svd</SFDFile>
+          <SFDFile>$$Device:STM32F103C6$SVD\STM32F103xx.svd</SFDFile>
           <bCustSvd>0</bCustSvd>
           <UseEnv>0</UseEnv>
           <BinPath></BinPath>
@@ -248,12 +248,12 @@
               <IRAM>
                 <Type>0</Type>
                 <StartAddress>0x20000000</StartAddress>
-                <Size>0x5000</Size>
+                <Size>0x2800</Size>
               </IRAM>
               <IROM>
                 <Type>1</Type>
                 <StartAddress>0x8000000</StartAddress>
-                <Size>0x10000</Size>
+                <Size>0x8000</Size>
               </IROM>
               <XRAM>
                 <Type>0</Type>
@@ -278,7 +278,7 @@
               <OCR_RVCT4>
                 <Type>1</Type>
                 <StartAddress>0x8000000</StartAddress>
-                <Size>0x10000</Size>
+                <Size>0x8000</Size>
               </OCR_RVCT4>
               <OCR_RVCT5>
                 <Type>1</Type>
@@ -303,7 +303,7 @@
               <OCR_RVCT9>
                 <Type>0</Type>
                 <StartAddress>0x20000000</StartAddress>
-                <Size>0x5000</Size>
+                <Size>0x2800</Size>
               </OCR_RVCT9>
               <OCR_RVCT10>
                 <Type>0</Type>
@@ -339,9 +339,9 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls>--diag_suppress=870</MiscControls>
-              <Define>USE_STDPERIPH_DRIVER</Define>
+              <Define>USE_STDPERIPH_DRIVER,USE_STM3210E_EVAL</Define>
               <Undefine></Undefine>
-              <IncludePath>..\st_core;..\st_lib;..\os_src;..\library;..\main</IncludePath>
+              <IncludePath>..\st_core;..\st_lib;..\os_src;..\library;..\main;..\usb</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -869,6 +869,151 @@
               <FileName>BaseFunc.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\main\BaseFunc.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>USB</GroupName>
+          <Files>
+            <File>
+              <FileName>hw_config.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\usb\hw_config.h</FilePath>
+            </File>
+            <File>
+              <FileName>platform_config.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\usb\platform_config.h</FilePath>
+            </File>
+            <File>
+              <FileName>usb_conf.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\usb\usb_conf.h</FilePath>
+            </File>
+            <File>
+              <FileName>usb_core.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\usb\usb_core.c</FilePath>
+            </File>
+            <File>
+              <FileName>usb_core.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\usb\usb_core.h</FilePath>
+            </File>
+            <File>
+              <FileName>usb_def.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\usb\usb_def.h</FilePath>
+            </File>
+            <File>
+              <FileName>usb_desc.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\usb\usb_desc.h</FilePath>
+            </File>
+            <File>
+              <FileName>usb_init.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\usb\usb_init.c</FilePath>
+            </File>
+            <File>
+              <FileName>usb_init.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\usb\usb_init.h</FilePath>
+            </File>
+            <File>
+              <FileName>usb_int.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\usb\usb_int.c</FilePath>
+            </File>
+            <File>
+              <FileName>usb_int.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\usb\usb_int.h</FilePath>
+            </File>
+            <File>
+              <FileName>usb_istr.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\usb\usb_istr.h</FilePath>
+            </File>
+            <File>
+              <FileName>usb_lib.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\usb\usb_lib.h</FilePath>
+            </File>
+            <File>
+              <FileName>usb_mem.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\usb\usb_mem.c</FilePath>
+            </File>
+            <File>
+              <FileName>usb_mem.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\usb\usb_mem.h</FilePath>
+            </File>
+            <File>
+              <FileName>usb_prop.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\usb\usb_prop.h</FilePath>
+            </File>
+            <File>
+              <FileName>usb_pwr.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\usb\usb_pwr.h</FilePath>
+            </File>
+            <File>
+              <FileName>usb_regs.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\usb\usb_regs.c</FilePath>
+            </File>
+            <File>
+              <FileName>usb_regs.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\usb\usb_regs.h</FilePath>
+            </File>
+            <File>
+              <FileName>usb_sil.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\usb\usb_sil.c</FilePath>
+            </File>
+            <File>
+              <FileName>usb_sil.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\usb\usb_sil.h</FilePath>
+            </File>
+            <File>
+              <FileName>usb_type.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\usb\usb_type.h</FilePath>
+            </File>
+            <File>
+              <FileName>hw_config.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\usb\hw_config.c</FilePath>
+            </File>
+            <File>
+              <FileName>usb_desc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\usb\usb_desc.c</FilePath>
+            </File>
+            <File>
+              <FileName>usb_endp.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\usb\usb_endp.c</FilePath>
+            </File>
+            <File>
+              <FileName>usb_istr.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\usb\usb_istr.c</FilePath>
+            </File>
+            <File>
+              <FileName>usb_prop.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\usb\usb_prop.c</FilePath>
+            </File>
+            <File>
+              <FileName>usb_pwr.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\usb\usb_pwr.c</FilePath>
             </File>
           </Files>
         </Group>
