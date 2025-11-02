@@ -477,8 +477,47 @@ uint8_t JoyState(void)
   */
 void Joystick_Send(uint8_t Keys)
 {
+
+	// 定义键盘报告（8 字节）
+	uint8_t Keyboard_Report[8] = {0,0,0,0,0,0,0,0};
+
+    // 1️⃣ 清空报告
+	for(int i=0;i<8;i++)
+	{
+		Keyboard_Report[i] = 0;
+	}
+	
+    // 2️⃣ 填写普通按键区（第3字节开始）
+    Keyboard_Report[2] = 0x04;  // 比如 keycode = 0x04 表示 'a' (HID Usage ID)
+
+    // 3️⃣ 把数据写入端点缓冲区（假设端点号 = 1，地址 = 0x81）
+    USB_SIL_Write(EP1_IN, Keyboard_Report, sizeof(Keyboard_Report));
+
+    // 4️⃣ 让端点1的数据有效，准备发送
+    SetEPTxValid(ENDP1);
+
+    // 等待主机读取后，再发送“释放键”报告
+    
+	for(int i=0;i<10;i++)
+	{
+		for(int j=0;j<60000;j++);
+	}
+
+    // 5️⃣ 发送“释放”报告（所有键松开）
+	for(int i=0;i<8;i++)
+	{
+		Keyboard_Report[i] = 0;
+	}
+    USB_SIL_Write(EP1_IN, Keyboard_Report, sizeof(Keyboard_Report));
+    SetEPTxValid(ENDP1);
+	
+	
+	
+	
+	return;
+
   uint8_t Mouse_Buffer[4] = {0, 0, 0, 0};
-  int8_t X = 0, Y = Keys;
+  int8_t X = 5, Y = Keys;
   
 //      switch (Keys)
 //  {

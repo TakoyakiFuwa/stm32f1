@@ -20,6 +20,7 @@
 
 #include "hw_config.h"
 #include "U_USART1.h"
+extern const uint8_t Joystick_ReportDescriptor[];
 
 int main(void)
 {
@@ -63,8 +64,6 @@ int main(void)
 	GPIO_InitStruct.GPIO_Pin = GPIO_Pin_5|GPIO_Pin_6;
 	GPIO_InitStruct.GPIO_Speed = GPIO_Speed_2MHz;
 	GPIO_Init(GPIOB,&GPIO_InitStruct);
-	
-
   while (1)
   {
 //    if (bDeviceState == CONFIGURED && a++<=5)
