@@ -11,7 +11,7 @@
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
       <pArmCC>5060528::V5.06 update 5 (build 528)::.\ARMCC</pArmCC>
-      <pCCUsed>5060528::V5.06 update 5 (build 528)::.\ARMCC</pCCUsed>
+      <pCCUsed>5060528::V5.06 update 5 (build 528)::.\armcc</pCCUsed>
       <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
@@ -928,6 +928,36 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>usb_conf</GroupName>
+          <Files>
+            <File>
+              <FileName>hw_config.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\usb_conf\hw_config.c</FilePath>
+            </File>
+            <File>
+              <FileName>hw_config.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\usb_conf\hw_config.h</FilePath>
+            </File>
+            <File>
+              <FileName>usb_desc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\usb_conf\usb_desc.c</FilePath>
+            </File>
+            <File>
+              <FileName>usb_desc.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\usb_conf\usb_desc.h</FilePath>
+            </File>
+            <File>
+              <FileName>Def_KeyBoard.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\usb_conf\Def_KeyBoard.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>library</GroupName>
           <Files>
             <File>
@@ -939,6 +969,16 @@
               <FileName>U_USART1.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\library\U_USART1.h</FilePath>
+            </File>
+            <File>
+              <FileName>A_ADC.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\library\A_ADC.c</FilePath>
+            </File>
+            <File>
+              <FileName>A_ADC.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\library\A_ADC.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -990,35 +1030,10 @@
               <FileType>5</FileType>
               <FilePath>..\main\FreeRTOSConfig.h</FilePath>
             </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>usb_conf</GroupName>
-          <Files>
             <File>
-              <FileName>hw_config.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\usb_conf\hw_config.c</FilePath>
-            </File>
-            <File>
-              <FileName>hw_config.h</FileName>
+              <FileName>QinYu_define.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\usb_conf\hw_config.h</FilePath>
-            </File>
-            <File>
-              <FileName>usb_desc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\usb_conf\usb_desc.c</FilePath>
-            </File>
-            <File>
-              <FileName>usb_desc.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\usb_conf\usb_desc.h</FilePath>
-            </File>
-            <File>
-              <FileName>Def_KeyBoard.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\usb_conf\Def_KeyBoard.h</FilePath>
+              <FilePath>..\main\QinYu_define.h</FilePath>
             </File>
           </Files>
         </Group>
