@@ -8,9 +8,9 @@
 /*  外设库  */
 #include "U_USART1.h"
 
-#define BF_LED_RCC_GPIOX	RCC_APB2Periph_GPIOB
-#define BF_LED_GPIOX		GPIOB
-#define BF_LED_Pin			GPIO_Pin_0
+#define BF_LED_RCC_GPIOX	RCC_APB2Periph_GPIOA
+#define BF_LED_GPIOX		GPIOA
+#define BF_LED_Pin			GPIO_Pin_8
 
 /**@brief  启动时相关的初始化函数
   *@param  void
@@ -37,11 +37,14 @@ void Start_Func(void)
 void Start_LEDInit(void)
 {
 	RCC_APB2PeriphClockCmd(BF_LED_RCC_GPIOX,ENABLE);
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB,ENABLE);
 	GPIO_InitTypeDef GPIO_InitStruct;
 	GPIO_InitStruct.GPIO_Mode = GPIO_Mode_Out_PP;
 	GPIO_InitStruct.GPIO_Pin = BF_LED_Pin;
 	GPIO_InitStruct.GPIO_Speed = GPIO_Speed_50MHz;
 	GPIO_Init(BF_LED_GPIOX,&GPIO_InitStruct);
+	GPIO_InitStruct.GPIO_Pin = GPIO_Pin_15;
+	GPIO_Init(GPIOB,&GPIO_InitStruct);
 	U_Printf("LED初始化完成 \r\n");
 }
 /**@brief  看门狗初始化
@@ -72,8 +75,10 @@ void Start_LEDTask(void* pvParameters)
 	{
 		IWDG_ReloadCounter();
 		GPIO_WriteBit(BF_LED_GPIOX,BF_LED_Pin,Bit_RESET);
+		GPIO_WriteBit(GPIOB,GPIO_Pin_15,Bit_RESET);
 		vTaskDelay(400);
 		GPIO_WriteBit(BF_LED_GPIOX,BF_LED_Pin,Bit_SET);
+		GPIO_WriteBit(GPIOB,GPIO_Pin_15,Bit_SET);
 		vTaskDelay(600);
 	}
 }
