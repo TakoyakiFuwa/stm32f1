@@ -5,13 +5,12 @@
 /*  OS库  */
 #include "FreeRTOS.h"
 #include "task.h"
-/*  定义  */
-#include "QinYu_define.h"
 /*  接口库  */
 #include "Func.h"
 /*  外设库  */
 #include "U_USART1.h"
 #include "A_ADC.h"
+#include "TFT_ST7735.h"
 
 /**@brief  初始化线程
   */
@@ -21,6 +20,7 @@ void Start_MainTask(void* pvParameters)
 	Start_Func();
 		//初始化函数-格式建议用Init_Xxx
 	Init_ADC();
+	Init_TFT();
 	
 	//进入临界区
 	taskENTER_CRITICAL();
@@ -45,11 +45,7 @@ uint8_t Start_CommandFunc(void)
 	else if(Command("COMMAND")||Command("HELP"))
 	{
 		U_Printf("这里是stm32f103c6t6的测试程序 \r\n");
-		U_Printf("当前测试是USB模拟键盘 \r\n");
-	}
-	else if(Command("QINYU"))
-	{
-		U_Printf(QinYu);
+		U_Printf("现在在整理库文件2026/6/23-12:54 \r\n");
 	}
 	
 	//结束
