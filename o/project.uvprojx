@@ -865,6 +865,11 @@
               <FileType>5</FileType>
               <FilePath>..\ui\UI_DEF.h</FilePath>
             </File>
+            <File>
+              <FileName>UI_DEF.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\ui\UI_DEF.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
