@@ -10,7 +10,7 @@
       <TargetName>Target_1</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pArmCC>5060528::V5.06 update 5 (build 528)::.\ARMCC</pArmCC>
+      <pArmCC>5060528::V5.06 update 5 (build 528)::.\armcc</pArmCC>
       <pCCUsed>5060528::V5.06 update 5 (build 528)::.\armcc</pCCUsed>
       <uAC6>0</uAC6>
       <TargetOption>
@@ -341,7 +341,7 @@
               <MiscControls>--diag_suppress=870</MiscControls>
               <Define>USE_STDPERIPH_DRIVER,USE_STM3210E_EVAL</Define>
               <Undefine></Undefine>
-              <IncludePath>..\st_core;..\st_lib;..\os_src;..\library;..\main;..\usb_conf;..\usb_core</IncludePath>
+              <IncludePath>..\st_core;..\st_lib;..\os_src;..\library;..\main;..\ui</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -839,6 +839,31 @@
               <FileName>TFT_ST7735.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\library\TFT_ST7735.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>ui</GroupName>
+          <Files>
+            <File>
+              <FileName>TFT_font.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\ui\TFT_font.c</FilePath>
+            </File>
+            <File>
+              <FileName>TFT_font.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\ui\TFT_font.h</FilePath>
+            </File>
+            <File>
+              <FileName>qy_ascii_font.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\ui\qy_ascii_font.h</FilePath>
+            </File>
+            <File>
+              <FileName>UI_DEF.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\ui\UI_DEF.h</FilePath>
             </File>
           </Files>
         </Group>

@@ -8,8 +8,8 @@
 /*  外设库  */
 #include "U_USART1.h"
 
-#define BF_LED_RCC_GPIOX	RCC_APB2Periph_GPIOA
-#define BF_LED_GPIOX		GPIOA
+#define BF_LED_RCC_GPIOX	RCC_APB2Periph_GPIOB
+#define BF_LED_GPIOX		GPIOB
 #define BF_LED_Pin			GPIO_Pin_8
 
 /**@brief  启动时相关的初始化函数

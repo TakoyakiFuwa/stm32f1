@@ -17,11 +17,11 @@
  */
 /*	当前屏幕方向配置为:
  *	+——————————>x(160)
- *  |	———>			*
- *  |	———>刷			*
- *  |	———>新			*	pin引脚位置
- *  |	———>顺			*
- *  |	———>序			*
+ *  |	1 2 3 4		*
+ *  |	| | | |		*
+ *  |	| | | |		*	pin引脚位置
+ *  |	v v	v v		*
+ *  |	刷新顺序	*
  *  |	可根据"TFT_SoftwareInit"中的提示配置
  *	|	(0x36指令)
  *  v
@@ -128,6 +128,7 @@ void Init_TFT(void)
 	{
 		TFT_WriteData16(blue);
 	}
+	
 		//初始化完成
 	U_Printf("TFT初始化完成 \r\n");
 }
@@ -235,15 +236,15 @@ void TFT_SetRect(uint16_t x,uint16_t y,uint16_t width,uint16_t hight)
 {
 	TFT_WriteCmd(0x2a);
 	TFT_WriteData(0x00);
-	TFT_WriteData(x);
-	TFT_WriteData(0x00);
-	TFT_WriteData(x+width-1);
-	
-	TFT_WriteCmd(0x2b);
-	TFT_WriteData(0x00);
 	TFT_WriteData(y);
 	TFT_WriteData(0x00);
 	TFT_WriteData(y+hight-1);
+	
+	TFT_WriteCmd(0x2b);
+	TFT_WriteData(0x00);
+	TFT_WriteData(x);
+	TFT_WriteData(0x00);
+	TFT_WriteData(x+width-1);
 	
 	TFT_WriteCmd(0x2c);
 }
@@ -295,20 +296,6 @@ void Cmd_TFT_XYTest(void)
 	{
 		TFT_WriteData16(green);
 	}
-}
-/**@brief  设置TFT屏幕的xy轴对称或者换向
-  *@param  x y 对称设置
-  *@param  x_y 交换xy轴
-  *@retval void
-  *@add	   库的默认配置是0x60(0110 0000) 即x反转 y不反转 xy调换
-  */
-void TFT_SetXY(uint8_t x,uint8_t y,uint8_t x_y) 
-{
-	uint8_t xy_data = (y<<7)|(x<<6)|(x_y<<5);
-	//Y反转-X反转-XY调换-Y刷新方向-RGB(0)/BGR(1)-X刷新方向-0-0
-	//0xC0(1100 0000)->(Y反转-X反转-XY不调换-0 0000)
-	TFT_WriteCmd(0x36); //MX, MY, RGB mode 
-	TFT_WriteData(xy_data);
 }
 /**@brief  这段完全来自商家的例程
   *@param  void
@@ -374,7 +361,7 @@ static void TFT_SoftwareInit(void)
 	//0xC0(1100 0000)->(Y反转-X反转-XY不调换-0 0000)
 	//0110 0000
 	TFT_WriteCmd(0x36); //MX, MY, RGB mode 
-	TFT_WriteData(0xE0); //0110
+	TFT_WriteData(0x80); //1000 0000
 	
 	//ST7735R Gamma Sequence
 	TFT_WriteCmd(0xe0); 

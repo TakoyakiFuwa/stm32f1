@@ -11,6 +11,7 @@
 #include "U_USART1.h"
 #include "A_ADC.h"
 #include "TFT_ST7735.h"
+#include "TFT_font.h"
 
 /**@brief  初始化线程
   */
@@ -21,11 +22,14 @@ void Start_MainTask(void* pvParameters)
 		//初始化函数-格式建议用Init_Xxx
 	Init_ADC();
 	Init_TFT();
-	
+	Init_TFTF();
+	TFTF_ShowNum(10,20,1234,1,5,6);
+	TFTF_ShowString(10,70,"Hello!",3,10,6);
+
 	//进入临界区
 	taskENTER_CRITICAL();
 		//线程函数-格式建议用Task_Xxx
-	xTaskCreate(Task_ADC,"ADC",64,NULL,3,NULL);
+//	xTaskCreate(Task_ADC,"ADC",64,NULL,3,NULL);
 	
 	//退出临界区
 	taskEXIT_CRITICAL();
