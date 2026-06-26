@@ -10,7 +10,7 @@
 
 #define BF_LED_RCC_GPIOX	RCC_APB2Periph_GPIOB
 #define BF_LED_GPIOX		GPIOB
-#define BF_LED_Pin			GPIO_Pin_8
+#define BF_LED_Pin			GPIO_Pin_6
 
 /**@brief  启动时相关的初始化函数
   *@param  void

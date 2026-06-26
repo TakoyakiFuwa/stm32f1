@@ -21,16 +21,18 @@ void Start_MainTask(void* pvParameters)
 	//启动内容
 	Start_Func();
 		//初始化函数-格式建议用Init_Xxx
-	Init_ADC();
-	Init_TFT();
-	Init_UI();
-	UI_Write_Num(10,10,8068,FONT_NI7SEG_2412,COLOR_DARK_BLUE,5);
-	UI_Write_String(10,44,"NONE",FONT_PIXEL_3216,COLOR_LIGHT_WHITE,4);
+	Init_Func();
+//	Init_ADC();
+//	Init_TFT();
+//	Init_UI();
+//	UI_Write_Num(10,10,8068,FONT_NI7SEG_2412,COLOR_DARK_BLUE,5);
+//	UI_Write_String(10,44,"NONE",FONT_PIXEL_3216,COLOR_LIGHT_WHITE,4);
 	
 	//进入临界区
 	taskENTER_CRITICAL();
 		//线程函数-格式建议用Task_Xxx
-	xTaskCreate(Task_ADC,"ADC",64,NULL,3,NULL);
+//	xTaskCreate(Task_ADC,"ADC",64,NULL,3,NULL);
+	xTaskCreate(Task_Func,"Func",64,NULL,1,NULL);
 	
 	//退出临界区
 	taskEXIT_CRITICAL();
