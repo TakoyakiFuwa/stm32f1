@@ -82,7 +82,7 @@ void Task_ADC(void* pvParameters)
 	}
 	while(1)
 	{
-		vTaskDelay(5);
+		vTaskDelay(10);
 		if(count>=100)
 		{
 			for(int i=0;i<3;i++)

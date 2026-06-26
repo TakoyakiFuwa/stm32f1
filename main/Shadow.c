@@ -13,6 +13,8 @@
 #include "TFT_ST7735.h"
 #include "UI_DEF.h"
 #include "TFT_font.h"
+#include "P_PWM.h"
+#include "R_RTC.h"
 
 /**@brief  初始化线程
   */
@@ -22,7 +24,9 @@ void Start_MainTask(void* pvParameters)
 	Start_Func();
 		//初始化函数-格式建议用Init_Xxx
 	Init_Func();
-//	Init_ADC();
+	Init_PWM();
+	Init_ADC();
+	Init_RTC();
 //	Init_TFT();
 //	Init_UI();
 //	UI_Write_Num(10,10,8068,FONT_NI7SEG_2412,COLOR_DARK_BLUE,5);
@@ -31,8 +35,10 @@ void Start_MainTask(void* pvParameters)
 	//进入临界区
 	taskENTER_CRITICAL();
 		//线程函数-格式建议用Task_Xxx
-//	xTaskCreate(Task_ADC,"ADC",64,NULL,3,NULL);
 	xTaskCreate(Task_Func,"Func",64,NULL,1,NULL);
+	xTaskCreate(Task_PWM,"PWM",64,NULL,1,NULL);
+//	xTaskCreate(Task_ADC,"ADC",64,NULL,2,NULL);
+	xTaskCreate(Task_RTC,"RTC",32,NULL,1,NULL);
 	
 	//退出临界区
 	taskEXIT_CRITICAL();

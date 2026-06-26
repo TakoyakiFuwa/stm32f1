@@ -840,6 +840,26 @@
               <FileType>5</FileType>
               <FilePath>..\library\TFT_ST7735.h</FilePath>
             </File>
+            <File>
+              <FileName>P_PWM.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\library\P_PWM.c</FilePath>
+            </File>
+            <File>
+              <FileName>P_PWM.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\library\P_PWM.h</FilePath>
+            </File>
+            <File>
+              <FileName>R_RTC.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\library\R_RTC.c</FilePath>
+            </File>
+            <File>
+              <FileName>R_RTC.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\library\R_RTC.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
