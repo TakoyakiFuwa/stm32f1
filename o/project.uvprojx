@@ -860,6 +860,16 @@
               <FileType>5</FileType>
               <FilePath>..\library\R_RTC.h</FilePath>
             </File>
+            <File>
+              <FileName>TFT_DMA.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\library\TFT_DMA.h</FilePath>
+            </File>
+            <File>
+              <FileName>TFT_DMA.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\library\TFT_DMA.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -889,6 +899,11 @@
               <FileName>UI_DEF.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\ui\UI_DEF.c</FilePath>
+            </File>
+            <File>
+              <FileName>qy_pic.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\ui\qy_pic.h</FilePath>
             </File>
           </Files>
         </Group>

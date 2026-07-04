@@ -17,12 +17,12 @@ void UI_Draw_Frame(uint16_t x,uint16_t y,uint16_t width,uint16_t height,uint16_t
 void UI_Draw_Line(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2,uint16_t color,int8_t thick);
 
 /*  关于取模显示的部分  */
-void UI_Put_01Pic(uint16_t x,uint16_t y,uint8_t pic01,uint8_t color_index);
-void UI_Put_Char(uint16_t x,uint16_t y,char _char,uint8_t font,uint8_t color_index);
+void UI_Put_Pic01(uint16_t x,uint16_t y,uint8_t pic01,uint8_t fcolor,uint8_t bcolor);
+void UI_Put_Char(uint16_t x,uint16_t y,char _char,uint8_t font,uint8_t fcolor,uint8_t bcolor);
 
 /*  关于文本/数字的部分  */
-void UI_Write_Num(uint16_t x,uint16_t y,uint32_t num,uint8_t font,uint8_t color_index,int8_t digits);
-void UI_Write_String(uint16_t x,uint16_t y,const char* text,uint8_t font,uint8_t color_index,int8_t NumOfChar);
+void UI_Write_Num(uint16_t x,uint16_t y,uint32_t num,uint8_t font,uint8_t fcolor,uint8_t bcolor,int8_t digits);
+void UI_Write_String(uint16_t x,uint16_t y,const char* text,uint8_t font,uint8_t fcolor,uint8_t bcolor,int8_t NumOfChar);
 
 
 #endif

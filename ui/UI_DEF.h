@@ -26,6 +26,7 @@
 #define FONT_PIXEL_3216		1
 #define FONT_NI7SEG_2412	2
 #define FONT_NI7SEG_3216	3
+#define FONT_PIC_Test		4
 
 /*  初始化  */
 void Init_UI(void);

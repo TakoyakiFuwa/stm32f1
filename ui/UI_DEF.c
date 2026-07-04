@@ -77,10 +77,11 @@ static void FastInit_Font(uint8_t font_index,uint32_t font_lib,uint8_t height,ui
 }
 static void Init_Font(void)
 {
-	FastInit_Font(0,(uint32_t)font_ASCII_PIXEL_2412,24,12);
-	FastInit_Font(1,(uint32_t)font_ASCII_PIXEL_3216,32,16);
-	FastInit_Font(2,(uint32_t)font_ASCII_NI7SEG_2412,24,12);
-	FastInit_Font(3,(uint32_t)font_ASCII_NI7SEG_3216,32,16);
+	FastInit_Font(FONT_PIXEL_2412,(uint32_t)font_ASCII_PIXEL_2412,24,12);
+	FastInit_Font(FONT_PIXEL_3216,(uint32_t)font_ASCII_PIXEL_3216,32,16);
+	FastInit_Font(FONT_NI7SEG_2412,(uint32_t)font_ASCII_NI7SEG_2412,24,12);
+	FastInit_Font(FONT_NI7SEG_3216,(uint32_t)font_ASCII_NI7SEG_3216,32,16);
+	
 }
 
 /**@brief  UI组件初始化

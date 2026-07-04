@@ -68,7 +68,7 @@ void UI_Draw_Frame(uint16_t x,uint16_t y,uint16_t width,uint16_t height,uint16_t
   *@param  x,y 坐标(左上角)
   *@param  pic01 图片内容
   */
-void UI_Put_01Pic(uint16_t x,uint16_t y,uint8_t pic01,uint8_t color_index)
+void UI_Put_01Pic(uint16_t x,uint16_t y,uint8_t pic01,uint8_t fcolor,uint8_t bcolor)
 {
 	tft_font f_pic01 = FONT[pic01];
 	
@@ -80,13 +80,26 @@ void UI_Put_01Pic(uint16_t x,uint16_t y,uint8_t pic01,uint8_t color_index)
 		{
 			if( (f_pic01.font_lib[i]&(0x01<<j)) != 0 )
 			{
-				UI_Pixel(COLOR[(color_index>>4)]);
+				UI_Pixel(COLOR[fcolor]);
 			}
 			else
 			{
-				UI_Pixel(COLOR[(color_index&0x0F)]);
+				UI_Pixel(COLOR[bcolor]);
 			}
 		}
+	}
+}
+/**@brief  显示图像
+  *@param  x,y		位置
+  *@param  pic		图像
+  */
+void UI_Put_565Pic(uint16_t x,uint16_t y,uint8_t font)
+{
+	tft_font f_font = FONT[font];
+	UI_SetRect(x,y,f_font.width,f_font.height);
+	for(int i=0;i<f_font.width*f_font.height;i++)
+	{
+		UI_Pixel(f_font.font_lib[i]);
 	}
 }
 /**@brief  显示单个字符
@@ -94,7 +107,7 @@ void UI_Put_01Pic(uint16_t x,uint16_t y,uint8_t pic01,uint8_t color_index)
   *@param	_char 	要显示的字符
   *@param  font		字体
   */
-void UI_Put_Char(uint16_t x,uint16_t y,char _char,uint8_t font,uint8_t color_index)
+void UI_Put_Char(uint16_t x,uint16_t y,char _char,uint8_t font,uint8_t fcolor,uint8_t bcolor)
 {
 	tft_font f_font = FONT[font];
 	UI_SetRect(x,y,f_font.width,f_font.height);
@@ -106,11 +119,11 @@ void UI_Put_Char(uint16_t x,uint16_t y,char _char,uint8_t font,uint8_t color_ind
 		{
 			if( (f_font.font_lib[index+i]&(0x01<<j)) != 0 )
 			{
-				UI_Pixel(COLOR[(color_index>>4)]);
+				UI_Pixel(COLOR[fcolor]);
 			}
 			else
 			{
-				UI_Pixel(COLOR[(color_index&0x0F)]);
+				UI_Pixel(COLOR[bcolor]);
 			}
 		}
 	}
@@ -122,7 +135,7 @@ void UI_Put_Char(uint16_t x,uint16_t y,char _char,uint8_t font,uint8_t color_ind
   *@param  -
   *@param  digits  显示的位数，超过位数会吞掉低位
   */
-void UI_Write_Num(uint16_t x,uint16_t y,uint32_t num,uint8_t font,uint8_t color_index,int8_t digits)
+void UI_Write_Num(uint16_t x,uint16_t y,uint32_t num,uint8_t font,uint8_t fcolor,uint8_t bcolor,int8_t digits)
 {
 	tft_font f_font = FONT[font];
 	uint32_t num_length = 1;
@@ -134,7 +147,7 @@ void UI_Write_Num(uint16_t x,uint16_t y,uint32_t num,uint8_t font,uint8_t color_
 	int8_t i=0;
 	for(num_length/=10;num_length>=1;num_length/=10)
 	{
-		UI_Put_Char(x+f_font.width*(i++),y,num/num_length+'0',font,color_index);
+		UI_Put_Char(x+f_font.width*(i++),y,num/num_length+'0',font,fcolor,bcolor);
 		//减去最高位
 		num -= (num - (num%num_length));
 	}
@@ -143,7 +156,7 @@ void UI_Write_Num(uint16_t x,uint16_t y,uint32_t num,uint8_t font,uint8_t color_
   *@param  -
   *@param  NumOfChar  显示的数量
   */
-void UI_Write_String(uint16_t x,uint16_t y,const char* text,uint8_t font,uint8_t color_index,int8_t NumOfChar)
+void UI_Write_String(uint16_t x,uint16_t y,const char* text,uint8_t font,uint8_t fcolor,uint8_t bcolor,int8_t NumOfChar)
 {
 	tft_font f_font=FONT[font];
 	int i=0;
@@ -151,14 +164,14 @@ void UI_Write_String(uint16_t x,uint16_t y,const char* text,uint8_t font,uint8_t
 	{
 		if(--NumOfChar<0)
 		{
-			UI_Put_Char(x+f_font.width*(--i),y,'-',font,color_index);
+			UI_Put_Char(x+f_font.width*(--i),y,'-',font,fcolor,bcolor);
 			return;
 		}
-		UI_Put_Char(x+f_font.width*(i),y,text[i],font,color_index);
+		UI_Put_Char(x+f_font.width*(i),y,text[i],font,fcolor,bcolor);
 	}
 	for(;NumOfChar>0;NumOfChar--)
 	{
-		UI_Put_Char(x+f_font.width*(i++),y,' ',font,color_index);
+		UI_Put_Char(x+f_font.width*(i++),y,' ',font,fcolor,bcolor);
 	}
 }
 

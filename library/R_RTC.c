@@ -79,7 +79,6 @@ void Init_RTC(void)
 		RTC_WaitForLastTask();
 		R_PrintTime();
 		U_Printf("->%h \r\n",BKP_ReadBackupRegister(BKP_DR1));
-		
 	}
 	else 
 	{
