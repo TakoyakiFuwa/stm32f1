@@ -10,11 +10,11 @@
 /**@brief  PWM初始化
   */
 #define PWM_RCCX	RCC_APB2Periph_GPIOB
-#define PWM_RCCTIM	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4,ENABLE)
+#define PWM_RCCTIM	RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM1,ENABLE)
 #define PWM_GPIOX	GPIOB
-#define PWM_PIN		GPIO_Pin_6
-#define PWM_TIMX	TIM4
-#define PWM_CHX		1
+#define PWM_PIN		GPIO_Pin_15
+#define PWM_TIMX	TIM1
+#define PWM_CHX		3
 void Init_PWM(void)
 {
 	//时钟初始化
@@ -34,15 +34,20 @@ void Init_PWM(void)
 	TIM_InitStruct.TIM_ClockDivision = TIM_CKD_DIV1;
 	TIM_InitStruct.TIM_CounterMode = TIM_CounterMode_Up;
 	TIM_InitStruct.TIM_Period = 1000-1;
-	TIM_InitStruct.TIM_Prescaler = 18-1;
+	TIM_InitStruct.TIM_Prescaler = 9-1;
 	TIM_InitStruct.TIM_RepetitionCounter = 0;
 	TIM_TimeBaseInit(PWM_TIMX,&TIM_InitStruct);
 	//PWM初始化
+	TIM_CtrlPWMOutputs(PWM_TIMX,ENABLE);
 	TIM_OCInitTypeDef PWM_InitStruct;
 	PWM_InitStruct.TIM_OCMode = TIM_OCMode_PWM1;
 	PWM_InitStruct.TIM_OCPolarity = TIM_OCPolarity_Low;
 	PWM_InitStruct.TIM_OutputState = TIM_OutputState_Enable;
-	PWM_InitStruct.TIM_Pulse = 999;
+	PWM_InitStruct.TIM_Pulse = 9;
+	PWM_InitStruct.TIM_OCNIdleState = TIM_OCNIdleState_Reset;
+	PWM_InitStruct.TIM_OCNPolarity = TIM_OCNPolarity_Low;
+	PWM_InitStruct.TIM_OutputNState = TIM_OutputNState_Enable;
+	PWM_InitStruct.TIM_OCIdleState = TIM_OCIdleState_Reset;
 	switch(PWM_CHX)
 	{
 	case 1:TIM_OC1Init(PWM_TIMX,&PWM_InitStruct);break;
@@ -50,7 +55,6 @@ void Init_PWM(void)
 	case 3:TIM_OC3Init(PWM_TIMX,&PWM_InitStruct);break;
 	case 4:TIM_OC4Init(PWM_TIMX,&PWM_InitStruct);break;
 	}
-	TIM_OC1Init(PWM_TIMX,&PWM_InitStruct);
 	TIM_Cmd(PWM_TIMX,ENABLE);
 	
 	U_Printf("PWM初始化完成 \r\n");
@@ -59,11 +63,11 @@ void Init_PWM(void)
   */
 void Task_PWM(void* pvParameters)
 {
-	int16_t pwm_pulse = 500;
-	int16_t position = 3;
+	int16_t pwm_pulse = 10;
+	int16_t position = 1;
 	while(1)
 	{
-		vTaskDelay(5);
+		vTaskDelay(15);
 		switch(PWM_CHX)
 		{
 		case 1:TIM_SetCompare1(PWM_TIMX,pwm_pulse);break;
@@ -72,13 +76,15 @@ void Task_PWM(void* pvParameters)
 		case 4:TIM_SetCompare4(PWM_TIMX,pwm_pulse);break;
 		}
 		pwm_pulse += position;
-		if(pwm_pulse>=999)
+		if(pwm_pulse>=100)
 		{
-			position = -3;
+			vTaskDelay(1000);
+			position = -1;
 		}
-		else if(pwm_pulse<=1)
+		else if(pwm_pulse<=2)
 		{
-			position = 3;
+			vTaskDelay(1000);
+			position = 1;
 		}
 	}
 }

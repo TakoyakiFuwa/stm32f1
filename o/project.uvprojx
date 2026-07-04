@@ -870,6 +870,16 @@
               <FileType>1</FileType>
               <FilePath>..\library\TFT_DMA.c</FilePath>
             </File>
+            <File>
+              <FileName>W_W25QXX.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\library\W_W25QXX.c</FilePath>
+            </File>
+            <File>
+              <FileName>W_W25QXX.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\library\W_W25QXX.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

@@ -172,7 +172,7 @@ void Task_TFTD(void* pvParameters)
 }
 void Cmd_TFTD(void)
 {
-	
+
 }
 void TFTD_WriteCmd(uint8_t cmd)
 {
