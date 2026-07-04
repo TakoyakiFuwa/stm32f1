@@ -76,13 +76,8 @@ static void Init_TFTPin(void)
 	GPIO_InitStruct.GPIO_Pin = GPIO_Pin_0|GPIO_Pin_1|GPIO_Pin_10|GPIO_Pin_11|GPIO_Pin_14|GPIO_Pin_13;
 	GPIO_Init(GPIOB,&GPIO_InitStruct);
 	//给初始电平
-	GPIO_WriteBit(GPIOA,GPIO_Pin_5,Bit_RESET);
-	GPIO_WriteBit(GPIOA,GPIO_Pin_6,Bit_SET);
-	GPIO_WriteBit(GPIOA,GPIO_Pin_7,Bit_SET);
 	GPIO_WriteBit(GPIOB,GPIO_Pin_0,Bit_SET);
 	GPIO_WriteBit(GPIOB,GPIO_Pin_1,Bit_SET);
-	GPIO_WriteBit(GPIOB,GPIO_Pin_10,Bit_SET);
-	GPIO_WriteBit(GPIOB,GPIO_Pin_11,Bit_SET);
 	GPIO_WriteBit(GPIOB,GPIO_Pin_14,Bit_SET);
 	GPIO_WriteBit(GPIOB,GPIO_Pin_13,Bit_RESET);
 }

@@ -2,6 +2,7 @@
 #include "stm32f10x.h"                  // Device header
 #include "FreeRTOS.h"
 #include "task.h"
+#include "U_USART1.h"
 
 void Init_Func(void)
 {//TIM1_CH3
