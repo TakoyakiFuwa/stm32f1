@@ -47,6 +47,7 @@ void Start_MainTask(void* pvParameters)
 
 /**@brief  指令监听
   */
+uint8_t ram_hub[1024*2];
 uint8_t Start_CommandFunc(void)
 {
 	if(Command("Start_CommandFunc"))

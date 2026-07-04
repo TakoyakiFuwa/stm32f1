@@ -68,7 +68,7 @@ static void Init_TFTD_Pin(void)
 #include "qy_pic.h"
 extern const unsigned char IMG_120_68[];
 static void TFTD_SoftwareInit(void);
-uint16_t IMG_AAA[12*68];
+extern uint8_t ram_hub[];
 void Init_TFTD(void)
 {
 	//时钟初始化
@@ -102,10 +102,10 @@ void Init_TFTD(void)
 	SPI_Cmd(SPI1,ENABLE);
 	//DMA初始化
 	DMA_InitTypeDef DMA_InitStruct;
-	DMA_InitStruct.DMA_BufferSize = 120*17;
+	DMA_InitStruct.DMA_BufferSize = 1024*2;
 	DMA_InitStruct.DMA_DIR = DMA_DIR_PeripheralDST;
 	DMA_InitStruct.DMA_M2M = DMA_M2M_Disable;
-	DMA_InitStruct.DMA_MemoryBaseAddr = (uint32_t)IMG_AAA;
+	DMA_InitStruct.DMA_MemoryBaseAddr = (uint32_t)&ram_hub[0];
 	DMA_InitStruct.DMA_MemoryDataSize = DMA_MemoryDataSize_HalfWord;
 	DMA_InitStruct.DMA_MemoryInc = DMA_MemoryInc_Enable;
 	DMA_InitStruct.DMA_Mode = DMA_Mode_Normal;
@@ -142,15 +142,13 @@ void Init_TFTD(void)
 		//输出Smol Miku
 	TFTD_SetRect(20,30,120,68);
 			//开始通信
-	PIN_TFTD_DC_Data();
-	PIN_TFTD_CS_Low();
+	TFTD_Start();
 			//DMA输出处理
-	const uint16_t* temp_ptr = (const uint16_t*)&IMG_120_68[0];
 	for(int j=0;j<10;j++)
 	{
-		for(int i=0;i<12*68;i++)
+		for(int i=0;i<12*68*2;i++)
 		{
-			IMG_AAA[i] = temp_ptr[j*12*68+i];
+			ram_hub[i] = IMG_120_68[j*12*68*2+i];
 		}
 		DMA_Cmd(DMA1_Channel3,DISABLE);
 		DMA_SetCurrDataCounter(DMA1_Channel3,12*68);
@@ -214,6 +212,15 @@ void TFTD_WriteData16(uint16_t rgb565)
 	while(SPI_I2S_GetFlagStatus(SPI1,SPI_I2S_FLAG_TXE)!=SET);
 	while(SPI_I2S_GetFlagStatus(SPI1,SPI_I2S_FLAG_BSY)==SET);
 	//片选结束
+	PIN_TFTD_CS_High();
+}
+void TFTD_Start(void)
+{
+	PIN_TFTD_DC_Data();
+	PIN_TFTD_CS_Low();
+}
+void TFTD_Stop(void)
+{
 	PIN_TFTD_CS_High();
 }
 static void TFTD_SoftwareInit(void)
